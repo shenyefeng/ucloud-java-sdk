@@ -39,23 +39,25 @@ public class SignatureUtils {
             throw new RuntimeException(MsgEnum.U_00001.getMessage());
         }
         
-        String param = "?";
+        String param = "";
+        String paramEncoded = "?";
         for(String key : treeMap.keySet()) {
             try {
-                param += key + "=" + URLEncoder.encode(treeMap.get(key) + "", "utf-8") + "&";
+                param += key + "" + treeMap.get(key) + "";
+                paramEncoded += key + "=" + URLEncoder.encode(treeMap.get(key) + "", "utf-8") + "&";
             } catch (UnsupportedEncodingException e) {
                 LogUtils.exception(logger, e);
             }
         }
-        param = param.substring(0, param.length() - 1);
+        paramEncoded = paramEncoded.substring(0, paramEncoded.length() - 1);
         logger.debug("Generated parameters are: " + param);
         
-        String signture = EncoderUtils.sha1(privateKey, param);
+        String signture = EncoderUtils.sha1(param + privateKey);
         logger.debug("Generated signatrue is: " + signture);
         
-        param += "&Signature=" + signture;
-        logger.debug("Generated parameters(included signture) are: " + param);
+        paramEncoded += "&Signature=" + signture;
+        logger.debug("Generated parameters(included signture) are: " + paramEncoded);
         
-        return param;
+        return paramEncoded;
     }
 }
