@@ -23,6 +23,8 @@ import org.apache.log4j.Logger;
 import cn.ucloud.sdk.utils.HttpClientUtils;
 import cn.ucloud.sdk.utils.PropertiesUtils;
 import cn.ucloud.sdk.utils.SignatureUtils;
+import cn.ucloud.sdk.utils.VoUtils;
+import cn.ucloud.sdk.vo.UcloudInVo;
 
 /**
  * 
@@ -46,30 +48,18 @@ public class UcloudClient {
         return new UcloudClient(publicKey, privateKey);
     }
 
-    public void describeImage(String dc) {
-        TreeMap<String, Object> map = createMap();
-        map.put("Region", dc);
-        map.put("Action", "DescribeImage");
-        map.put("ImageType", "Base");
-        map.put("OsType", "Windows");
-        
-        String result = execute(map);
-        
-        logger.info(result);
-//        Map<String, String> resMap = JsonUtils.getJsonToMap(result);
-        
-    }
-
-    private TreeMap<String, Object> createMap() {
-        TreeMap<String, Object> map = new TreeMap<String, Object>();
-        map.put("PublicKey", publicKey);
-        return map;
+    public <T> T exec(UcloudInVo inVo, Class<T> type) {
+        return VoUtils.buildOutVo(execute(inVo), type);
     }
     
-    private String execute(TreeMap<String, Object> map) {
+    private String execute(UcloudInVo vo) {
+        vo.setPublicKey(publicKey);
+        TreeMap<String, Object> map = VoUtils.genMap(vo);
         String param = SignatureUtils.signature(privateKey, map);
         String url = apiUrl + param;
         logger.debug("Request url is: " + url);
-        return HttpClientUtils.getByHttps(url);
+        String res = HttpClientUtils.getByHttps(url);
+        logger.debug("Call result is: " + res);
+        return res;
     }
 }

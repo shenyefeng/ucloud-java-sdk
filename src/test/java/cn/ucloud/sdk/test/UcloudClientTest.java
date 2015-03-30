@@ -29,8 +29,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cn.ucloud.sdk.UcloudClient;
+import cn.ucloud.sdk.enums.ChargeTypeEnum;
 import cn.ucloud.sdk.enums.DataCenterEnum;
+import cn.ucloud.sdk.enums.LoginModeEnum;
 import cn.ucloud.sdk.utils.SignatureUtils;
+import cn.ucloud.sdk.vo.uhost.in.CreateUHostInstanceInVo;
+import cn.ucloud.sdk.vo.uhost.in.DescribeImageInVo;
+import cn.ucloud.sdk.vo.uhost.out.CreateUHostInstanceOutVo;
+import cn.ucloud.sdk.vo.uhost.out.DescribeImageoutVo;
 
 /**
  * 
@@ -91,6 +97,26 @@ public class UcloudClientTest {
 
     @Test
     public void testDescribeImage() {
-        client.describeImage(DataCenterEnum.北京BGP_C.getValue());
+        DescribeImageInVo in = new DescribeImageInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        DescribeImageoutVo out = client.exec(in, DescribeImageoutVo.class);
+        System.out.println(out.getTotalCount());
+        Assert.assertNotNull(out.getImageSet());
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+    
+    @Test
+    public void testCreateUHostInstance() {
+        CreateUHostInstanceInVo in = new CreateUHostInstanceInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setImageId("e36b3acf76663067684332055ade6bae");
+        in.setLoginMode(LoginModeEnum.Password.name());
+        in.setPassword("ucloud12345");
+        in.setcPU(1);
+        in.setMemory(1024);
+        in.setDiskSpace(0);
+        in.setChargeType(ChargeTypeEnum.Month.name());
+        CreateUHostInstanceOutVo out = client.exec(in, CreateUHostInstanceOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
     }
 }
