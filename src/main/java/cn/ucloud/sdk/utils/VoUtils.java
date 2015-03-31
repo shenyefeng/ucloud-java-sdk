@@ -31,6 +31,9 @@ public class VoUtils {
                 continue;
             }
             key = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
+            if(key.indexOf("_") > -1) {
+                key = key.replaceAll("_", ".");
+            }
             value = getValue(object, field.getName());
             if (value != null) {
                 map.put(key, value);

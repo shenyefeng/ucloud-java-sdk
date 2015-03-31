@@ -14,44 +14,39 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo;
+package cn.ucloud.sdk.vo.uhost.in;
+
+import cn.ucloud.sdk.enums.ActionEnum;
+import cn.ucloud.sdk.utils.EncoderUtils;
+import cn.ucloud.sdk.vo.PageVo;
 
 /**
  * 
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class UcloudInVo {
-    private String action;
-    private String region;
-    private String publicKey;
-    
-    public String getRegion() {
-        return region;
+public class ResetUHostInstancePasswordInVo extends PageVo {
+
+    private String uHostId;
+    private String password;
+
+    public ResetUHostInstancePasswordInVo() {
+        super(ActionEnum.ResetUHostInstancePassword.name());
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public String getuHostId() {
+        return uHostId;
     }
 
-    public UcloudInVo(String action) {
-        super();
-        this.setAction(action);
+    public void setuHostId(String uHostId) {
+        this.uHostId = uHostId;
     }
 
-    public String getAction() {
-        return action;
+    public String getPassword() {
+        return password;
     }
 
-    private void setAction(String action) {
-        this.action = action;
-    }
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public void setPassword(String password) {
+        this.password = EncoderUtils.base64(password);
     }
 }

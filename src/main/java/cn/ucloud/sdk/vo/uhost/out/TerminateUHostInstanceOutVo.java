@@ -14,44 +14,34 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo;
+package cn.ucloud.sdk.vo.uhost.out;
+
+import java.util.Set;
+
+import cn.ucloud.sdk.vo.UcloudOutVo;
 
 /**
  * 
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class UcloudInVo {
-    private String action;
-    private String region;
-    private String publicKey;
-    
-    public String getRegion() {
-        return region;
+public class TerminateUHostInstanceOutVo extends UcloudOutVo {
+    private Integer totalCount;
+    private Set<UHost> uHostSet;
+
+    public Integer getTotalCount() {
+        return totalCount;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
-    public UcloudInVo(String action) {
-        super();
-        this.setAction(action);
+    public Set<UHost> getuHostSet() {
+        return uHostSet;
     }
 
-    public String getAction() {
-        return action;
-    }
-
-    private void setAction(String action) {
-        this.action = action;
-    }
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public void setuHostSet(Set<UHost> uHostSet) {
+        this.uHostSet = uHostSet;
     }
 }

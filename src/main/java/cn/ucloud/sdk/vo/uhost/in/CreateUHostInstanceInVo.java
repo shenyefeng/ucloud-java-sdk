@@ -27,7 +27,6 @@ import cn.ucloud.sdk.vo.PageVo;
  */
 public class CreateUHostInstanceInVo extends PageVo {
 
-    private String region;
     private String imageId;
     private String loginMode;
     private String password;
@@ -43,14 +42,6 @@ public class CreateUHostInstanceInVo extends PageVo {
 
     public CreateUHostInstanceInVo() {
         super(ActionEnum.CreateUHostInstance.name());
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
     }
 
     public String getImageId() {

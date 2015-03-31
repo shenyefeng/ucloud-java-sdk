@@ -14,44 +14,56 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo;
+package cn.ucloud.sdk.vo.uhost.in;
+
+import cn.ucloud.sdk.enums.ActionEnum;
+import cn.ucloud.sdk.vo.PageVo;
 
 /**
  * 
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class UcloudInVo {
-    private String action;
-    private String region;
-    private String publicKey;
-    
-    public String getRegion() {
-        return region;
+public class ResizeUHostInstanceInVo extends PageVo {
+
+    private String uHostId;
+    private Integer cPU;
+    private Integer memory;
+    private Integer diskSpace;
+
+    public ResizeUHostInstanceInVo() {
+        super(ActionEnum.ResizeUHostInstance.name());
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public String getuHostId() {
+        return uHostId;
     }
 
-    public UcloudInVo(String action) {
-        super();
-        this.setAction(action);
+    public void setuHostId(String uHostId) {
+        this.uHostId = uHostId;
     }
 
-    public String getAction() {
-        return action;
+    public Integer getcPU() {
+        return cPU;
     }
 
-    private void setAction(String action) {
-        this.action = action;
+    public void setcPU(Integer cPU) {
+        this.cPU = cPU;
     }
 
-    public String getPublicKey() {
-        return publicKey;
+    public Integer getMemory() {
+        return memory;
     }
 
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public void setMemory(Integer memory) {
+        this.memory = memory;
+    }
+
+    public Integer getDiskSpace() {
+        return diskSpace;
+    }
+
+    public void setDiskSpace(Integer diskSpace) {
+        this.diskSpace = diskSpace;
     }
 }

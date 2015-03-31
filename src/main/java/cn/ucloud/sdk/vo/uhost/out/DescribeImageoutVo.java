@@ -27,7 +27,7 @@ import cn.ucloud.sdk.vo.UcloudOutVo;
  */
 public class DescribeImageoutVo extends UcloudOutVo {
     private Integer totalCount;
-    private Set<ImageSet> imageSet;
+    private Set<Image> imageSet;
 
     public Integer getTotalCount() {
         return totalCount;
@@ -37,11 +37,11 @@ public class DescribeImageoutVo extends UcloudOutVo {
         this.totalCount = totalCount;
     }
 
-    public Set<ImageSet> getImageSet() {
+    public Set<Image> getImageSet() {
         return imageSet;
     }
 
-    public void setImageSet(Set<ImageSet> imageSet) {
+    public void setImageSet(Set<Image> imageSet) {
         this.imageSet = imageSet;
     }
 }

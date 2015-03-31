@@ -17,6 +17,7 @@
 package cn.ucloud.sdk.vo.uhost.in;
 
 import cn.ucloud.sdk.enums.ActionEnum;
+import cn.ucloud.sdk.utils.EncoderUtils;
 import cn.ucloud.sdk.vo.PageVo;
 
 /**
@@ -24,29 +25,31 @@ import cn.ucloud.sdk.vo.PageVo;
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class DescribeImageInVo extends PageVo {
-    private String imageType;
-    private String osType;
+public class ReinstallUHostInstanceInVo extends PageVo {
+
+    private String uHostId;
+    private String password;
     private String imageId;
+    private String reserveDisk;
 
-    public DescribeImageInVo() {
-        super(ActionEnum.DescribeImage.name());
+    public ReinstallUHostInstanceInVo() {
+        super(ActionEnum.ReinstallUHostInstance.name());
     }
 
-    public String getImageType() {
-        return imageType;
+    public String getuHostId() {
+        return uHostId;
     }
 
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
+    public void setuHostId(String uHostId) {
+        this.uHostId = uHostId;
     }
 
-    public String getOsType() {
-        return osType;
+    public String getPassword() {
+        return password;
     }
 
-    public void setOsType(String osType) {
-        this.osType = osType;
+    public void setPassword(String password) {
+        this.password = EncoderUtils.base64(password);
     }
 
     public String getImageId() {
@@ -57,4 +60,11 @@ public class DescribeImageInVo extends PageVo {
         this.imageId = imageId;
     }
 
+    public String getReserveDisk() {
+        return reserveDisk;
+    }
+
+    public void setReserveDisk(String reserveDisk) {
+        this.reserveDisk = reserveDisk;
+    }
 }

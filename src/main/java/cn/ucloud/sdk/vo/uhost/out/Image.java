@@ -21,7 +21,7 @@ package cn.ucloud.sdk.vo.uhost.out;
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class ImageSet {
+public class Image {
     private String imageId;
     private String imageName;
     private String osType;
