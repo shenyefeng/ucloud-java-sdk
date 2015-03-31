@@ -77,18 +77,22 @@ public class VoUtils {
     @SuppressWarnings("unchecked")
     private static void changeMapKey(Map<String, Object> resMap, Map<String, Object> map) {
         Map<String, Object> resMapTmp;
-        List<Map<String, Object>> list;
+        List<Object> list;
         for(String key : map.keySet()) {
             if(map.get(key) instanceof Map) {
                 resMapTmp = new HashMap<String, Object>();
                 changeMapKey(resMapTmp, (Map<String, Object>)map.get(key));
                 resMap.put(key.substring(0, 1).toLowerCase() + key.substring(1), resMapTmp);
             } else if(map.get(key) instanceof List) {
-                list = new ArrayList<Map<String,Object>>();
-                for(Map<String, Object> mapTmp : (List<Map<String, Object>>)map.get(key)) {
-                    resMapTmp = new HashMap<String, Object>();
-                    changeMapKey(resMapTmp, mapTmp);
-                    list.add(resMapTmp);
+                list = new ArrayList<Object>();
+                for(Object tmp : (List<Object>)map.get(key)) {
+                    if(tmp instanceof Map) {
+                        resMapTmp = new HashMap<String, Object>();
+                        changeMapKey(resMapTmp, (Map<String, Object>)tmp);
+                        list.add(resMapTmp);
+                    } else {
+                        list.add(tmp);
+                    }
                 }
                 resMap.put(key.substring(0, 1).toLowerCase() + key.substring(1), list);
             } else {

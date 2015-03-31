@@ -33,25 +33,52 @@ import cn.ucloud.sdk.enums.ChargeTypeEnum;
 import cn.ucloud.sdk.enums.DataCenterEnum;
 import cn.ucloud.sdk.enums.LoginModeEnum;
 import cn.ucloud.sdk.utils.SignatureUtils;
+import cn.ucloud.sdk.vo.udisk.in.CreateUDiskInVo;
+import cn.ucloud.sdk.vo.udisk.in.DeleteUDiskInVo;
+import cn.ucloud.sdk.vo.udisk.out.CreateUDiskOutVo;
+import cn.ucloud.sdk.vo.udisk.out.DeleteUDiskOutVo;
+import cn.ucloud.sdk.vo.uhost.in.AttachUdiskInVo;
+import cn.ucloud.sdk.vo.uhost.in.CreateCustomImageInVo;
 import cn.ucloud.sdk.vo.uhost.in.CreateUHostInstanceInVo;
+import cn.ucloud.sdk.vo.uhost.in.CreateUHostInstanceSnapshotInVo;
 import cn.ucloud.sdk.vo.uhost.in.DescribeImageInVo;
 import cn.ucloud.sdk.vo.uhost.in.DescribeUHostInstanceInVo;
+import cn.ucloud.sdk.vo.uhost.in.DescribeUHostInstanceSnapshotInVo;
+import cn.ucloud.sdk.vo.uhost.in.DetachUdiskInVo;
+import cn.ucloud.sdk.vo.uhost.in.GetUHostInstancePriceInVo;
+import cn.ucloud.sdk.vo.uhost.in.GetUHostInstanceVncInfoInVo;
+import cn.ucloud.sdk.vo.uhost.in.ModifyUHostInstanceNameInVo;
+import cn.ucloud.sdk.vo.uhost.in.ModifyUHostInstanceRemarkInVo;
+import cn.ucloud.sdk.vo.uhost.in.ModifyUHostInstanceTagInVo;
 import cn.ucloud.sdk.vo.uhost.in.RebootUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.ReinstallUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.ResetUHostInstancePasswordInVo;
 import cn.ucloud.sdk.vo.uhost.in.ResizeUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.StartUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.StopUHostInstanceInVo;
+import cn.ucloud.sdk.vo.uhost.in.TerminateCustomImageInVo;
 import cn.ucloud.sdk.vo.uhost.in.TerminateUHostInstanceInVo;
+import cn.ucloud.sdk.vo.uhost.out.AttachUdiskOutVo;
+import cn.ucloud.sdk.vo.uhost.out.CreateCustomImageOutVo;
 import cn.ucloud.sdk.vo.uhost.out.CreateUHostInstanceOutVo;
+import cn.ucloud.sdk.vo.uhost.out.CreateUHostInstanceSnapshotOutVo;
 import cn.ucloud.sdk.vo.uhost.out.DescribeImageoutVo;
 import cn.ucloud.sdk.vo.uhost.out.DescribeUHostInstanceOutVo;
+import cn.ucloud.sdk.vo.uhost.out.DescribeUHostInstanceSnapshotOutVo;
+import cn.ucloud.sdk.vo.uhost.out.DetachUdiskOutVo;
+import cn.ucloud.sdk.vo.uhost.out.GetUHostInstancePriceOutVo;
+import cn.ucloud.sdk.vo.uhost.out.GetUHostInstanceVncInfoOutVo;
+import cn.ucloud.sdk.vo.uhost.out.ModifyUHostInstanceNameOutVo;
+import cn.ucloud.sdk.vo.uhost.out.ModifyUHostInstanceRemarkOutVo;
+import cn.ucloud.sdk.vo.uhost.out.ModifyUHostInstanceTagOutVo;
+import cn.ucloud.sdk.vo.uhost.out.Price;
 import cn.ucloud.sdk.vo.uhost.out.RebootUHostInstanceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.ReinstallUHostInstanceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.ResetUHostInstancePasswordOutVo;
 import cn.ucloud.sdk.vo.uhost.out.ResizeUHostInstanceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.StartUHostInstanceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.StopUHostInstanceOutVo;
+import cn.ucloud.sdk.vo.uhost.out.TerminateCustomImageOutVo;
 import cn.ucloud.sdk.vo.uhost.out.TerminateUHostInstanceOutVo;
 
 /**
@@ -79,7 +106,7 @@ public class UcloudClientTest {
 
     @Test
     public void testSignature() {
-        
+
         TreeMap<String, Object> map = new TreeMap<String, Object>();
         map.put("Action", "CreateUHostInstance");
         map.put("Region", "cn-north-01");
@@ -94,18 +121,18 @@ public class UcloudClientTest {
         map.put("Quantity", 1);
         map.put("PublicKey", "ucloudsomeone@example.com1296235120854146120");
         String res = SignatureUtils.signature("46f09bb9fab4f12dfc160dae12273d5332b5debe", map);
-        
+
         String paramEncoded = "?";
-        for(String key : map.keySet()) {
+        for (String key : map.keySet()) {
             try {
                 paramEncoded += key + "=" + URLEncoder.encode(map.get(key) + "", "utf-8") + "&";
             } catch (UnsupportedEncodingException e) {
             }
         }
-        
+
         paramEncoded = paramEncoded.substring(0, paramEncoded.length() - 1);
         paramEncoded += "&Signature=7a517649e4e9da3b6c82c932d667daa1599ae3a1";
-        
+
         Assert.assertEquals(paramEncoded, res);
     }
 
@@ -120,7 +147,7 @@ public class UcloudClientTest {
         Assert.assertNotNull(out.getImageSet());
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testCreateUHostInstance() {
         CreateUHostInstanceInVo in = new CreateUHostInstanceInVo();
@@ -135,16 +162,16 @@ public class UcloudClientTest {
         CreateUHostInstanceOutVo out = client.exec(in, CreateUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testDescribeUHostInstance() {
         DescribeUHostInstanceInVo in = new DescribeUHostInstanceInVo();
         in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-//        in.setuHostIds_0("uhost-f1y3dd");
+        // in.setuHostIds_0("uhost-f1y3dd");
         DescribeUHostInstanceOutVo out = client.exec(in, DescribeUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testStopUHostInstance() {
         StopUHostInstanceInVo in = new StopUHostInstanceInVo();
@@ -153,7 +180,7 @@ public class UcloudClientTest {
         StopUHostInstanceOutVo out = client.exec(in, StopUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testResetUHostInstancePassword() {
         ResetUHostInstancePasswordInVo in = new ResetUHostInstancePasswordInVo();
@@ -173,7 +200,7 @@ public class UcloudClientTest {
         ResizeUHostInstanceOutVo out = client.exec(in, ResizeUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testReinstallUHostInstance() {
         ReinstallUHostInstanceInVo in = new ReinstallUHostInstanceInVo();
@@ -183,7 +210,7 @@ public class UcloudClientTest {
         ReinstallUHostInstanceOutVo out = client.exec(in, ReinstallUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testStartUHostInstance() {
         StartUHostInstanceInVo in = new StartUHostInstanceInVo();
@@ -192,7 +219,7 @@ public class UcloudClientTest {
         StartUHostInstanceOutVo out = client.exec(in, StartUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
-    
+
     @Test
     public void testRebootUHostInstance() {
         RebootUHostInstanceInVo in = new RebootUHostInstanceInVo();
@@ -203,10 +230,149 @@ public class UcloudClientTest {
     }
 
     @Test
+    public void testModifyUHostInstanceName() {
+        ModifyUHostInstanceNameInVo in = new ModifyUHostInstanceNameInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        in.setName("ubuntu1204-001");
+        ModifyUHostInstanceNameOutVo out = client.exec(in, ModifyUHostInstanceNameOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testModifyUHostInstanceTag() {
+        ModifyUHostInstanceTagInVo in = new ModifyUHostInstanceTagInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        in.setTag("ubuntu1204-001-tag");
+        ModifyUHostInstanceTagOutVo out = client.exec(in, ModifyUHostInstanceTagOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testModifyUHostInstanceRemark() {
+        ModifyUHostInstanceRemarkInVo in = new ModifyUHostInstanceRemarkInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        in.setRemark("ubuntu1204-001-remark");
+        ModifyUHostInstanceRemarkOutVo out = client.exec(in, ModifyUHostInstanceRemarkOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testGetUHostInstancePrice() {
+        GetUHostInstancePriceInVo in = new GetUHostInstancePriceInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setImageId("e36b3acf76663067684332055ade6bae");
+        in.setcPU(1);
+        in.setMemory(1024);
+        in.setCount(1);
+        GetUHostInstancePriceOutVo out = client.exec(in, GetUHostInstancePriceOutVo.class);
+        for (Price price : out.getPriceSet()) {
+            System.out.println(price.getChargeType());
+            System.out.println(price.getPrice());
+        }
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testGetUHostInstanceVncInfo() {
+        GetUHostInstanceVncInfoInVo in = new GetUHostInstanceVncInfoInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        GetUHostInstanceVncInfoOutVo out = client.exec(in, GetUHostInstanceVncInfoOutVo.class);
+
+        System.out.println(out.getuHostId());
+        System.out.println(out.getVncIP());
+        System.out.println(out.getVncPort());
+        System.out.println(out.getVncPassword());
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testCreateCustomImage() {
+        CreateCustomImageInVo in = new CreateCustomImageInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        in.setImageName("image-ubuntu1204");
+        in.setImageDescription("image-ubuntu1204-desc");
+        CreateCustomImageOutVo out = client.exec(in, CreateCustomImageOutVo.class);
+        System.out.println(out.getImageId());
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testTerminateCustomImage() {
+        TerminateCustomImageInVo in = new TerminateCustomImageInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setImageId("uimage-4pitdj");
+        TerminateCustomImageOutVo out = client.exec(in, TerminateCustomImageOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testCreateUDisk() {
+        CreateUDiskInVo in = new CreateUDiskInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setSize(1);
+        in.setName("udisk-name1");
+        in.setChargeType(ChargeTypeEnum.Month.name());
+        CreateUDiskOutVo out = client.exec(in, CreateUDiskOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testAttachUdisk() {
+        AttachUdiskInVo in = new AttachUdiskInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        in.setuDiskId("bs-2khsfm");
+        AttachUdiskOutVo out = client.exec(in, AttachUdiskOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testDetachUdisk() {
+        DetachUdiskInVo in = new DetachUdiskInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        in.setuDiskId("bs-2khsfm");
+        DetachUdiskOutVo out = client.exec(in, DetachUdiskOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testDeleteUDisk() {
+        DeleteUDiskInVo in = new DeleteUDiskInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuDiskId("bs-rb1nl1");
+        DeleteUDiskOutVo out = client.exec(in, DeleteUDiskOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testCreateUHostInstanceSnapshot() {
+        CreateUHostInstanceSnapshotInVo in = new CreateUHostInstanceSnapshotInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        CreateUHostInstanceSnapshotOutVo out = client.exec(in, CreateUHostInstanceSnapshotOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
+    public void testDescribeUHostInstanceSnapshot() {
+        DescribeUHostInstanceSnapshotInVo in = new DescribeUHostInstanceSnapshotInVo();
+        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+        in.setuHostId("uhost-f1y3dd");
+        DescribeUHostInstanceSnapshotOutVo out = client.exec(in, DescribeUHostInstanceSnapshotOutVo.class);
+        Assert.assertEquals(0, out.getRetCode().intValue());
+    }
+
+    @Test
     public void testTerminateUHostInstance() {
         TerminateUHostInstanceInVo in = new TerminateUHostInstanceInVo();
         in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-//        in.setuHostId("uhost-f1y3dd");
+        // in.setuHostId("uhost-f1y3dd");
         TerminateUHostInstanceOutVo out = client.exec(in, TerminateUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
