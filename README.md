@@ -27,6 +27,8 @@
   * [CreateUHostInstanceSnapshot] (#CreateUHostInstanceSnapshot)
   * [DescribeUHostInstanceSnapshot] (#DescribeUHostInstanceSnapshot)
 
+---
+
 <a name="准备"></a>
 ### 准备
 
@@ -41,6 +43,7 @@
 <a name="云主机"></a>
 ### 云主机
 
+---
 <a name="DescribeImage"></a>
 #### DescribeImage
 
