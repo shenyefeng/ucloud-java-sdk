@@ -18,7 +18,7 @@
 ##### 初始化UcloudClient
     UcloudClient client = UcloudClient.newClient("您的UCLOUD公钥", "您的UCLOUD密钥");
 
-若不了解`公钥和密钥`，请参见[“授权操作员”](https://consolev3.ucloud.cn/apikey)
+若不了解`公钥和密钥`，请参见[“公钥和密钥”](https://consolev3.ucloud.cn/apikey)
 
 <a name="UHost"></a>
 ### 云主机
@@ -28,9 +28,9 @@
 
 获取指定数据中心镜像列表，用户可通过指定镜像类型，操作系统类型，镜像Id进行过滤。
 
-  DescribeImageInVo in = new DescribeImageInVo();
-  in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-  DescribeImageoutVo out = client.exec(in, DescribeImageoutVo.class);
+    DescribeImageInVo in = new DescribeImageInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    DescribeImageoutVo out = client.exec(in, DescribeImageoutVo.class);
 
 
 
