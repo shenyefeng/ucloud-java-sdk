@@ -7,7 +7,7 @@
 ## 目录
 * [准备] (#准备)
 * [云主机] (#云主机)
-  * [DescribeImage] (#镜像描述)
+  * [DescribeImage] (#DescribeImage)
   * [CreateUHostInstance] (#CreateUHostInstance)
   * [DescribeUHostInstance] (#DescribeUHostInstance)
   * [TerminateUHostInstance] (#TerminateUHostInstance)
@@ -46,7 +46,7 @@
 <a name="云主机"></a>
 ### 云主机
 
-<a name="镜像描述"></a>
+<a name="DescribeImage"></a>
 #### DescribeImage
 
 获取指定数据中心镜像列表，用户可通过指定镜像类型，操作系统类型，镜像Id进行过滤。
