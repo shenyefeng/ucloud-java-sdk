@@ -8,6 +8,24 @@
 * [准备](#准备)
 * [云主机](#UHost)
   * [DescribeImage](#DescribeImage)
+  * [CreateUHostInstance](#CreateUHostInstance)
+  * [DescribeUHostInstance](#DescribeUHostInstance)
+  * [TerminateUHostInstance](#TerminateUHostInstance)
+  * [ResizeUHostInstance](#ResizeUHostInstance)
+  * [ReinstallUHostInstance](#ReinstallUHostInstance)
+  * [StartUHostInstance](#StartUHostInstance)
+  * [StopUHostInstance](#StopUHostInstance)
+  * [RebootUHostInstance](#RebootUHostInstance)
+  * [ResetUHostInstancePassword](#ResetUHostInstancePassword)
+  * [ModifyUHostInstanceName](#ModifyUHostInstanceName)
+  * [ModifyUHostInstanceTag](#ModifyUHostInstanceTag)
+  * [ModifyUHostInstanceRemark](#ModifyUHostInstanceRemark)
+  * [GetUHostInstancePrice](#GetUHostInstancePrice)
+  * [GetUHostInstanceVncInfo](#GetUHostInstanceVncInfo)
+  * [CreateCustomImage](#CreateCustomImage)
+  * [TerminateCustomImage](#TerminateCustomImage)
+  * [CreateUHostInstanceSnapshot](#CreateUHostInstanceSnapshot)
+  * [DescribeUHostInstanceSnapshot](#DescribeUHostInstanceSnapshot)
 
 <a name="准备"></a>
 ### 准备
@@ -32,5 +50,215 @@
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     DescribeImageoutVo out = client.exec(in, DescribeImageoutVo.class);
 
+<a name="CreateUHostInstance"></a>
+#### CreateUHostInstance
 
+指定数据中心，根据资源使用量创建指定数量的UHost实例。
+
+    CreateUHostInstanceInVo in = new CreateUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setImageId("e36b3acf76663067684332055ade6bae");
+    in.setLoginMode(LoginModeEnum.Password.name());
+    in.setPassword("ucloud12345");
+    in.setcPU(1);
+    in.setMemory(1024);
+    in.setDiskSpace(0);
+    in.setChargeType(ChargeTypeEnum.Month.name());
+    CreateUHostInstanceOutVo out = client.exec(in, CreateUHostInstanceOutVo.class);
+
+<a name="DescribeUHostInstance"></a>
+#### DescribeUHostInstance
+
+获取主机或主机列表信息，并可根据数据中心，主机ID等参数进行过滤。
+
+    DescribeUHostInstanceInVo in = new DescribeUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostIds_0("uhost-f1y3dd");
+    DescribeUHostInstanceOutVo out = client.exec(in, DescribeUHostInstanceOutVo.class);
+
+<a name="TerminateUHostInstance"></a>
+#### TerminateUHostInstance
+
+删除指定数据中心的UHost实例。
+
+    TerminateUHostInstanceInVo in = new TerminateUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    TerminateUHostInstanceOutVo out = client.exec(in, TerminateUHostInstanceOutVo.class);
+
+<a name="ResizeUHostInstance"></a>
+#### ResizeUHostInstance
+
+修改指定UHost实例的资源配置，如CPU核心数，内存容量大小，磁盘空间大小等。
+
+修改配置注意事项： 1.修改配置前，请确认该实例已经被关闭。 2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。
+
+    ResizeUHostInstanceInVo in = new ResizeUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setDiskSpace(80);
+    ResizeUHostInstanceOutVo out = client.exec(in, ResizeUHostInstanceOutVo.class);
+
+<a name="ReinstallUHostInstance"></a>
+#### ReinstallUHostInstance
+
+重新安装指定UHost实例的操作系统
+
+` 警告 1.请确认在重新安装之前，该实例已被关闭； 2.请确认该实例未挂载UDisk； 3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘； 4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式； 5.若主机CPU低于2核，不可重装为Windows系统。`
+
+    ReinstallUHostInstanceInVo in = new ReinstallUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setPassword("ucloud2345");
+    ReinstallUHostInstanceOutVo out = client.exec(in, ReinstallUHostInstanceOutVo.class);
+
+<a name="StartUHostInstance"></a>
+#### StartUHostInstance
+
+启动处于关闭状态的UHost实例，需要指定数据中心及UHostID两个参数的值。
+
+    StartUHostInstanceInVo in = new StartUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    StartUHostInstanceOutVo out = client.exec(in, StartUHostInstanceOutVo.class);
+
+
+<a name="StopUHostInstance"></a>
+#### StopUHostInstance
+
+指停止处于运行状态的UHost实例，需指定数据中心及UhostID。
+
+    StopUHostInstanceInVo in = new StopUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    StopUHostInstanceOutVo out = client.exec(in, StopUHostInstanceOutVo.class);
+
+<a name="RebootUHostInstance"></a>
+#### RebootUHostInstance
+
+重新启动UHost实例，需要指定数据中心及UHostID两个参数的值。
+
+    RebootUHostInstanceInVo in = new RebootUHostInstanceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    RebootUHostInstanceOutVo out = client.exec(in, RebootUHostInstanceOutVo.class);
+
+<a name="ResetUHostInstancePassword"></a>
+#### ResetUHostInstancePassword
+
+重置UHost实例的管理员密码。
+
+    ResetUHostInstancePasswordInVo in = new ResetUHostInstancePasswordInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setPassword("ucloud123456");
+    ResetUHostInstancePasswordOutVo out = client.exec(in, ResetUHostInstancePasswordOutVo.class);
+
+<a name="ModifyUHostInstanceName"></a>
+#### ModifyUHostInstanceName
+
+修改指定UHost实例名称，需要给出数据中心，UHostId，及新的实例名称。
+
+    ModifyUHostInstanceNameInVo in = new ModifyUHostInstanceNameInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setName("ubuntu1204-001");
+    ModifyUHostInstanceNameOutVo out = client.exec(in, ModifyUHostInstanceNameOutVo.class);
+
+<a name="ModifyUHostInstanceTag"></a>
+#### ModifyUHostInstanceTag
+
+修改指定UHost实例业务组标识。
+
+    ModifyUHostInstanceTagInVo in = new ModifyUHostInstanceTagInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setTag("ubuntu1204-001-tag");
+    ModifyUHostInstanceTagOutVo out = client.exec(in, ModifyUHostInstanceTagOutVo.class);
+
+<a name="ModifyUHostInstanceRemark"></a>
+#### ModifyUHostInstanceRemark
+
+修改指定UHost实例备注信息。
+
+    ModifyUHostInstanceRemarkInVo in = new ModifyUHostInstanceRemarkInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setRemark("ubuntu1204-001-remark");
+    ModifyUHostInstanceRemarkOutVo out = client.exec(in, ModifyUHostInstanceRemarkOutVo.class);
+
+<a name="GetUHostInstancePrice"></a>
+#### GetUHostInstancePrice
+
+根据UHost实例配置，获取UHost实例的价格。
+
+    GetUHostInstancePriceInVo in = new GetUHostInstancePriceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setImageId("e36b3acf76663067684332055ade6bae");
+    in.setcPU(1);
+    in.setMemory(1024);
+    in.setCount(1);
+    GetUHostInstancePriceOutVo out = client.exec(in, GetUHostInstancePriceOutVo.class);
+    for (Price price : out.getPriceSet()) {
+        System.out.println(price.getChargeType());
+        System.out.println(price.getPrice());
+    }
+
+<a name="GetUHostInstanceVncInfo"></a>
+#### GetUHostInstanceVncInfo
+
+获取指定UHost实例的管理VNC配置详细信息。
+
+    GetUHostInstanceVncInfoInVo in = new GetUHostInstanceVncInfoInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    GetUHostInstanceVncInfoOutVo out = client.exec(in, GetUHostInstanceVncInfoOutVo.class);
+
+    System.out.println(out.getuHostId());
+    System.out.println(out.getVncIP());
+    System.out.println(out.getVncPort());
+    System.out.println(out.getVncPassword());
+
+<a name="CreateCustomImage"></a>
+#### CreateCustomImage
+
+从指定UHost实例，生成自定义镜像。
+
+    CreateCustomImageInVo in = new CreateCustomImageInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    in.setImageName("image-ubuntu1204");
+    in.setImageDescription("image-ubuntu1204-desc");
+    CreateCustomImageOutVo out = client.exec(in, CreateCustomImageOutVo.class);
+    System.out.println(out.getImageId());
+
+<a name="TerminateCustomImage"></a>
+#### TerminateCustomImage
+
+删除用户自定义镜像
+
+    TerminateCustomImageInVo in = new TerminateCustomImageInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setImageId("uimage-4pitdj");
+    TerminateCustomImageOutVo out = client.exec(in, TerminateCustomImageOutVo.class);
+
+<a name="CreateUHostInstanceSnapshot"></a>
+#### CreateUHostInstanceSnapshot
+
+对指定UHost实例制作数据快照。
+
+    CreateUHostInstanceSnapshotInVo in = new CreateUHostInstanceSnapshotInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    CreateUHostInstanceSnapshotOutVo out = client.exec(in, CreateUHostInstanceSnapshotOutVo.class);
+
+<a name="DescribeUHostInstanceSnapshot"></a>
+#### DescribeUHostInstanceSnapshot
+
+获取已经存在的UHost实例的存储快照列表。
+
+    DescribeUHostInstanceSnapshotInVo in = new DescribeUHostInstanceSnapshotInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setuHostId("uhost-f1y3dd");
+    DescribeUHostInstanceSnapshotOutVo out = client.exec(in, DescribeUHostInstanceSnapshotOutVo.class);
 
