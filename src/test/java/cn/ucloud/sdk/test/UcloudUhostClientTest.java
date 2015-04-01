@@ -33,18 +33,12 @@ import cn.ucloud.sdk.enums.ChargeTypeEnum;
 import cn.ucloud.sdk.enums.DataCenterEnum;
 import cn.ucloud.sdk.enums.LoginModeEnum;
 import cn.ucloud.sdk.utils.SignatureUtils;
-import cn.ucloud.sdk.vo.udisk.in.CreateUDiskInVo;
-import cn.ucloud.sdk.vo.udisk.in.DeleteUDiskInVo;
-import cn.ucloud.sdk.vo.udisk.out.CreateUDiskOutVo;
-import cn.ucloud.sdk.vo.udisk.out.DeleteUDiskOutVo;
-import cn.ucloud.sdk.vo.uhost.in.AttachUdiskInVo;
 import cn.ucloud.sdk.vo.uhost.in.CreateCustomImageInVo;
 import cn.ucloud.sdk.vo.uhost.in.CreateUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.CreateUHostInstanceSnapshotInVo;
 import cn.ucloud.sdk.vo.uhost.in.DescribeImageInVo;
 import cn.ucloud.sdk.vo.uhost.in.DescribeUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.DescribeUHostInstanceSnapshotInVo;
-import cn.ucloud.sdk.vo.uhost.in.DetachUdiskInVo;
 import cn.ucloud.sdk.vo.uhost.in.GetUHostInstancePriceInVo;
 import cn.ucloud.sdk.vo.uhost.in.GetUHostInstanceVncInfoInVo;
 import cn.ucloud.sdk.vo.uhost.in.ModifyUHostInstanceNameInVo;
@@ -58,14 +52,12 @@ import cn.ucloud.sdk.vo.uhost.in.StartUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.StopUHostInstanceInVo;
 import cn.ucloud.sdk.vo.uhost.in.TerminateCustomImageInVo;
 import cn.ucloud.sdk.vo.uhost.in.TerminateUHostInstanceInVo;
-import cn.ucloud.sdk.vo.uhost.out.AttachUdiskOutVo;
 import cn.ucloud.sdk.vo.uhost.out.CreateCustomImageOutVo;
 import cn.ucloud.sdk.vo.uhost.out.CreateUHostInstanceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.CreateUHostInstanceSnapshotOutVo;
 import cn.ucloud.sdk.vo.uhost.out.DescribeImageoutVo;
 import cn.ucloud.sdk.vo.uhost.out.DescribeUHostInstanceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.DescribeUHostInstanceSnapshotOutVo;
-import cn.ucloud.sdk.vo.uhost.out.DetachUdiskOutVo;
 import cn.ucloud.sdk.vo.uhost.out.GetUHostInstancePriceOutVo;
 import cn.ucloud.sdk.vo.uhost.out.GetUHostInstanceVncInfoOutVo;
 import cn.ucloud.sdk.vo.uhost.out.ModifyUHostInstanceNameOutVo;
@@ -86,7 +78,7 @@ import cn.ucloud.sdk.vo.uhost.out.TerminateUHostInstanceOutVo;
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class UcloudClientTest {
+public class UcloudUhostClientTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -307,46 +299,6 @@ public class UcloudClientTest {
         in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setImageId("uimage-4pitdj");
         TerminateCustomImageOutVo out = client.exec(in, TerminateCustomImageOutVo.class);
-        Assert.assertEquals(0, out.getRetCode().intValue());
-    }
-
-    @Test
-    public void testCreateUDisk() {
-        CreateUDiskInVo in = new CreateUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-        in.setSize(1);
-        in.setName("udisk-name1");
-        in.setChargeType(ChargeTypeEnum.Month.name());
-        CreateUDiskOutVo out = client.exec(in, CreateUDiskOutVo.class);
-        Assert.assertEquals(0, out.getRetCode().intValue());
-    }
-
-    @Test
-    public void testAttachUdisk() {
-        AttachUdiskInVo in = new AttachUdiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-        in.setuHostId("uhost-f1y3dd");
-        in.setuDiskId("bs-2khsfm");
-        AttachUdiskOutVo out = client.exec(in, AttachUdiskOutVo.class);
-        Assert.assertEquals(0, out.getRetCode().intValue());
-    }
-
-    @Test
-    public void testDetachUdisk() {
-        DetachUdiskInVo in = new DetachUdiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-        in.setuHostId("uhost-f1y3dd");
-        in.setuDiskId("bs-2khsfm");
-        DetachUdiskOutVo out = client.exec(in, DetachUdiskOutVo.class);
-        Assert.assertEquals(0, out.getRetCode().intValue());
-    }
-
-    @Test
-    public void testDeleteUDisk() {
-        DeleteUDiskInVo in = new DeleteUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-        in.setuDiskId("bs-rb1nl1");
-        DeleteUDiskOutVo out = client.exec(in, DeleteUDiskOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
     }
 

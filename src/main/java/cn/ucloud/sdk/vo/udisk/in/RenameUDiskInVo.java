@@ -14,25 +14,24 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo.uhost.out;
+package cn.ucloud.sdk.vo.udisk.in;
 
-import cn.ucloud.sdk.vo.UcloudOutVo;
+import cn.ucloud.sdk.enums.ActionEnum;
+import cn.ucloud.sdk.vo.PageVo;
 
 /**
  * 
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class AttachUdiskOutVo extends UcloudOutVo {
-    private String uHostId;
+public class RenameUDiskInVo extends PageVo {
+
     private String uDiskId;
+    private String uDiskName;
+    private String projectId;
 
-    public String getuHostId() {
-        return uHostId;
-    }
-
-    public void setuHostId(String uHostId) {
-        this.uHostId = uHostId;
+    public RenameUDiskInVo() {
+        super(ActionEnum.RenameUDisk.name());
     }
 
     public String getuDiskId() {
@@ -41,6 +40,22 @@ public class AttachUdiskOutVo extends UcloudOutVo {
 
     public void setuDiskId(String uDiskId) {
         this.uDiskId = uDiskId;
+    }
+
+    public String getuDiskName() {
+        return uDiskName;
+    }
+
+    public void setuDiskName(String uDiskName) {
+        this.uDiskName = uDiskName;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
 }

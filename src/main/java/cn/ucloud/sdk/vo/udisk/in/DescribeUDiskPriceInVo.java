@@ -14,7 +14,7 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo.uhost.in;
+package cn.ucloud.sdk.vo.udisk.in;
 
 import cn.ucloud.sdk.enums.ActionEnum;
 import cn.ucloud.sdk.vo.PageVo;
@@ -24,30 +24,39 @@ import cn.ucloud.sdk.vo.PageVo;
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class AttachUdiskInVo extends PageVo {
+public class DescribeUDiskPriceInVo extends PageVo {
 
-    private String uHostId;
-    private String uDiskId;
+    private Integer size;
+    private String chargeType;
+    private Integer quantity;
     private String projectId;
 
-    public AttachUdiskInVo() {
-        super(ActionEnum.AttachUDisk.name());
+    public DescribeUDiskPriceInVo() {
+        super(ActionEnum.DescribeUDiskPrice.name());
     }
 
-    public String getuHostId() {
-        return uHostId;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setuHostId(String uHostId) {
-        this.uHostId = uHostId;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
-    public String getuDiskId() {
-        return uDiskId;
+    public String getChargeType() {
+        return chargeType;
     }
 
-    public void setuDiskId(String uDiskId) {
-        this.uDiskId = uDiskId;
+    public void setChargeType(String chargeType) {
+        this.chargeType = chargeType;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public String getProjectId() {
@@ -57,4 +66,5 @@ public class AttachUdiskInVo extends PageVo {
     public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
+
 }

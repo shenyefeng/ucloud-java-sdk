@@ -6,7 +6,7 @@
 
 ## 目录
 * [准备] (#准备)
-* [云主机] (#云主机)
+* [云主机] (#UHost)
   * [DescribeImage] (#DescribeImage)
   * [CreateUHostInstance] (#CreateUHostInstance)
   * [DescribeUHostInstance] (#DescribeUHostInstance)
@@ -26,7 +26,8 @@
   * [TerminateCustomImage] (#TerminateCustomImage)
   * [CreateUHostInstanceSnapshot] (#CreateUHostInstanceSnapshot)
   * [DescribeUHostInstanceSnapshot] (#DescribeUHostInstanceSnapshot)
-
+* [云监控] (#UMon)
+  * [GetMetric] (#GetMetric)
 ---
 
 <a name="准备"></a>
@@ -40,10 +41,10 @@
 
 若不了解`公钥和密钥`，请参见[“公钥和密钥”](https://consolev3.ucloud.cn/apikey)
 
-<a name="云主机"></a>
+---
+<a name="UHost"></a>
 ### 云主机
 
----
 <a name="DescribeImage"></a>
 #### DescribeImage
 
@@ -94,7 +95,7 @@
 
 修改指定UHost实例的资源配置，如CPU核心数，内存容量大小，磁盘空间大小等。
 
-> **修改配置注意事项：**1.修改配置前，请确认该实例已经被关闭。 2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。
+> **修改配置注意事项：***1.修改配置前，请确认该实例已经被关闭。 2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。
 
     ResizeUHostInstanceInVo in = new ResizeUHostInstanceInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
@@ -107,7 +108,7 @@
 
 重新安装指定UHost实例的操作系统
 
-> **警告：**1.请确认在重新安装之前，该实例已被关闭； 2.请确认该实例未挂载UDisk；3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘；4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式；5.若主机CPU低于2核，不可重装为Windows系统。
+> **警告：***1.请确认在重新安装之前，该实例已被关闭； 2.请确认该实例未挂载UDisk；3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘；4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式；5.若主机CPU低于2核，不可重装为Windows系统。
 
     ReinstallUHostInstanceInVo in = new ReinstallUHostInstanceInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
@@ -265,3 +266,27 @@
     in.setuHostId("uhost-f1y3dd");
     DescribeUHostInstanceSnapshotOutVo out = client.exec(in, DescribeUHostInstanceSnapshotOutVo.class);
 
+---
+<a name="UMon"></a>
+### 云监控
+
+<a name="GetMetric"></a>
+#### GetMetric
+
+获取监控数据
+
+    GetMetricInVo in = new GetMetricInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setResourceType(ResourceTypeEnum.uhost.name());
+    in.setMetricName_0(MetricNameUhostEnum.CPUUtilization.name());
+    in.setMetricName_1(MetricNameUhostEnum.MemUsage.name());
+    in.setResourceId("uhost-f1y3dd");
+    GetMetricOutVo out = client.exec(in, GetMetricOutVo.class);
+    for (MetricDataDetail data : out.getDataSets().getcPUUtilization()) {
+        System.out.println(data.getTimestamp());
+        System.out.println(data.getValue());
+    }
+    for (MetricDataDetail data : out.getDataSets().getMemUsage()) {
+        System.out.println(data.getTimestamp());
+        System.out.println(data.getValue());
+    }
