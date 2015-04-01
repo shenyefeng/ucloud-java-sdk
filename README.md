@@ -6,7 +6,7 @@
 
 ## 目录
 * [准备](#准备)
-* [云主机](#UHost)
+* [云主机](#云主机)
   * [DescribeImage](#DescribeImage)
   * [CreateUHostInstance](#CreateUHostInstance)
   * [DescribeUHostInstance](#DescribeUHostInstance)
@@ -38,7 +38,7 @@
 
 若不了解`公钥和密钥`，请参见[“公钥和密钥”](https://consolev3.ucloud.cn/apikey)
 
-<a name="UHost"></a>
+<a name="云主机"></a>
 ### 云主机
 
 <a name="DescribeImage"></a>
@@ -104,7 +104,12 @@
 
 重新安装指定UHost实例的操作系统
 
-` 警告 1.请确认在重新安装之前，该实例已被关闭； 2.请确认该实例未挂载UDisk； 3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘； 4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式； 5.若主机CPU低于2核，不可重装为Windows系统。`
+` 警告`
+` 1.请确认在重新安装之前，该实例已被关闭； `
+` 2.请确认该实例未挂载UDisk；`
+` 3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘；`
+` 4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式；`
+` 5.若主机CPU低于2核，不可重装为Windows系统。`
 
     ReinstallUHostInstanceInVo in = new ReinstallUHostInstanceInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
