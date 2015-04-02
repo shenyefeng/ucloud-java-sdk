@@ -26,6 +26,25 @@
   * [TerminateCustomImage] (#terminatecustomimage)
   * [CreateUHostInstanceSnapshot] (#createuhostinstancesnapshot)
   * [DescribeUHostInstanceSnapshot] (#describeuhostinstancesnapshot)
+* [网络] (#网络)
+  * [AllocateEIP] (#allocateeip)
+  * [DescribeEIP] (#describeeip)
+  * [UpdateEIPAttribute] (#updateeipattribute)
+  * [ReleaseEIP] (#releaseeip)
+  * [BindEIP] (#bindeip)
+  * [UnBindEIP] (#unbindeip)
+  * [ModifyEIPBandwidth] (#modifyeipbandwidth)
+  * [ModifyEIPWeight] (#modifyeipweight)
+  * [GetEIPPrice] (#geteipprice)
+  * [AllocateVIP] (#allocatevip)
+  * [DescribeVIP] (#describevip)
+  * [ReleaseVIP] (#releasevip)
+  * [DescribeSecurityGroup] (#describesecuritygroup)
+  * [DescribeSecurityGroupResource] (#describesecuritygroupresource)
+  * [CreateSecurityGroup] (#createsecuritygroup)
+  * [UpdateSecurityGroup] (#updatesecuritygroup)
+  * [GrantSecurityGroup] (#grantsecuritygroup)
+  * [DeleteSecurityGroup] (#deletesecuritygroup)
 * [云监控] (#云监控)
   * [GetMetric] (#getmetric)
 
@@ -96,7 +115,7 @@
 
 修改指定UHost实例的资源配置，如CPU核心数，内存容量大小，磁盘空间大小等。
 
-> **修改配置注意事项：***1.修改配置前，请确认该实例已经被关闭。 2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。
+> **修改配置注意事项：**1.修改配置前，请确认该实例已经被关闭。 2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。
 
     ResizeUHostInstanceInVo in = new ResizeUHostInstanceInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
@@ -109,7 +128,7 @@
 
 重新安装指定UHost实例的操作系统
 
-> **警告：***1.请确认在重新安装之前，该实例已被关闭； 2.请确认该实例未挂载UDisk；3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘；4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式；5.若主机CPU低于2核，不可重装为Windows系统。
+> **警告：**1.请确认在重新安装之前，该实例已被关闭； 2.请确认该实例未挂载UDisk；3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘；4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式；5.若主机CPU低于2核，不可重装为Windows系统。
 
     ReinstallUHostInstanceInVo in = new ReinstallUHostInstanceInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
@@ -292,3 +311,257 @@
         System.out.println(data.getTimestamp());
         System.out.println(data.getValue());
     }
+    
+---
+
+<a name="网络"></a>
+### 网络
+
+<a name="allocateeip"></a>
+### AllocateEIP
+
+根据提供信息，分配弹性IP
+
+    AllocateEIPInVo in = new AllocateEIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setOperatorName(OperatorNameEnum.Bgp.name());
+    in.setBandwidth(1);
+    in.setChargeType(ChargeTypeEnum.Month.name());
+    
+    AllocateEIPOutVo out = client.exec(in, AllocateEIPOutVo.class);
+    for (EIP eip : out.geteIPSet()) {
+        System.out.println(eip.geteIPId());
+        for(EIPAddr addr : eip.geteIPAddr()) {
+    	System.out.println(addr.getiP());
+    	System.out.println(addr.getOperatorName());
+        }
+    }
+
+<a name="describeeip"></a>
+### DescribeEIP
+
+获取弹性IP详细信息
+
+    DescribeEIPInVo in = new DescribeEIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPIds_0("eip-mmhr0f");
+
+    DescribeEIPOutVo out = client.exec(in, DescribeEIPOutVo.class);
+    for (EIP eip : out.geteIPSet()) {
+        System.out.println(eip.geteIPId());
+        for(EIPAddr addr : eip.geteIPAddr()) {
+            System.out.println(addr.getiP());
+            System.out.println(addr.getOperatorName());
+        }
+    }
+    
+<a name="updateeipattribute"></a>
+### UpdateEIPAttribute
+
+修改EIP名字业务组备注等属性字段
+
+    UpdateEIPAttributeInVo in = new UpdateEIPAttributeInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPId("eip-mmhr0f");
+    in.setName("eip name");
+    in.setRemark("eip remark");
+    in.setTag("eip tag");
+
+    UpdateEIPAttributeOutVo out = client.exec(in, UpdateEIPAttributeOutVo.class);
+
+<a name="releaseeip"></a>
+### ReleaseEIP
+
+释放EIP资源
+
+    ReleaseEIPInVo in = new ReleaseEIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPId("eip-n1hvdm");
+
+    ReleaseEIPOutVo out = client.exec(in, ReleaseEIPOutVo.class);
+
+<a name="bindeip"></a>
+### BindEIP
+
+将弹性IP绑定到资源上
+
+    BindEIPInVo in = new BindEIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPId("eip-mmhr0f");
+    in.setResourceType(ResourceTypeEnum.ulb.name());
+    in.setResourceId("ulb-2t22s4");
+
+    BindEIPOutVo out = client.exec(in, BindEIPOutVo.class);
+
+<a name="unbindeip"></a>
+### UnBindEIP
+
+将弹性IP从资源上解绑
+
+    UnBindEIPInVo in = new UnBindEIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPId("eip-mmhr0f");
+    in.setResourceType(ResourceTypeEnum.uhost.name());
+    in.setResourceId("uhost-f1y3dd");
+
+    UnBindEIPOutVo out = client.exec(in, UnBindEIPOutVo.class);
+
+<a name="modifyeipbandwidth"></a>
+### ModifyEIPBandwidth
+
+修改弹性IP的外网带宽
+
+    ModifyEIPBandwidthInVo in = new ModifyEIPBandwidthInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPId("eip-mmhr0f");
+    in.setBandwidth(1);
+
+    ModifyEIPBandwidthOutVo out = client.exec(in, ModifyEIPBandwidthOutVo.class);
+
+<a name="modifyeipweight"></a>
+### ModifyEIPWeight
+
+修改弹性IP的外网出口权重
+
+    ModifyEIPWeightInVo in = new ModifyEIPWeightInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.seteIPId("eip-mmhr0f");
+    in.setWeight(2);
+
+    ModifyEIPWeightOutVo out = client.exec(in, ModifyEIPWeightOutVo.class);
+
+<a name="geteipprice"></a>
+### GetEIPPrice
+
+获取弹性IP价格
+
+    GetEIPPriceInVo in = new GetEIPPriceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setOperatorName(OperatorNameEnum.Bgp.name());
+    in.setBandwidth(1);
+    in.setChargeType(ChargeTypeEnum.Month.name());
+    
+    GetEIPPriceOutVo out = client.exec(in, GetEIPPriceOutVo.class);
+    for(Price price : out.getPriceSet()) {
+        System.out.println(price.getChargeType());
+        System.out.println(price.getPrice());
+        System.out.println(price.getPurchaseValue());
+    }
+
+<a name="allocatevip"></a>
+### AllocateVIP
+
+根据提供信息，分配内网VIP(Virtual IP，多用于高可用程序作为漂移IP。)
+
+    AllocateVIPInVo in = new AllocateVIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setCount(2);
+
+    AllocateVIPOutVo out = client.exec(in, AllocateVIPOutVo.class);
+
+<a name="describevip"></a>
+### DescribeVIP
+
+获取内网VIP详细信息
+
+    DescribeVIPInVo in = new DescribeVIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+
+    DescribeVIPOutVo out = client.exec(in, DescribeVIPOutVo.class);
+
+<a name="releasevip"></a>
+### ReleaseVIP
+
+释放VIP资源
+
+    ReleaseVIPInVo in = new ReleaseVIPInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setvIP("10.10.74.26");
+
+    ReleaseVIPOutVo out = client.exec(in, ReleaseVIPOutVo.class);
+
+<a name="describesecuritygroup"></a>
+### DescribeSecurityGroup
+
+获取防火墙组信息
+
+    DescribeSecurityGroupInVo in = new DescribeSecurityGroupInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setResourceType(ResourceTypeEnum.uhost.name());
+    in.setResourceId("uhost-f1y3dd");
+
+    DescribeSecurityGroupOutVo out = client.exec(in, DescribeSecurityGroupOutVo.class);
+
+<a name="describesecuritygroupresource"></a>
+### DescribeSecurityGroupResource
+
+获取防火墙组所绑定资源的外网IP
+
+    DescribeSecurityGroupResourceInVo in = new DescribeSecurityGroupResourceInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setGroupId(14881);
+
+    DescribeSecurityGroupResourceOutVo out = client.exec(in, DescribeSecurityGroupResourceOutVo.class);
+
+<a name="createsecuritygroup"></a>
+### CreateSecurityGroup
+
+创建防火墙组
+
+    CreateSecurityGroupInVo in = new CreateSecurityGroupInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    RuleIn rule = new RuleIn();
+    rule.setProto(ProtoEnum.TCP.name());
+    rule.setDst_port("22-80");
+    rule.setSrc_ip("0.0.0.0/0");
+    rule.setAction(RuleActionEnum.ACCEPT.name());
+    rule.setPriority(PriorityEnum.MIDDLE.getValue());
+    in.setRule_0(rule);
+    in.setGroupName("sg name");
+    in.setDescription("sg desc");
+
+    CreateSecurityGroupOutVo out = client.exec(in, CreateSecurityGroupOutVo.class);
+
+<a name="updatesecuritygroup"></a>
+### UpdateSecurityGroup
+
+更新防火墙规则
+>**注解**在更新防火墙规则时，新的规则会覆盖掉原有规则。所以若需要更改或加入新的规则，需要将原所有规则与新规则一起提交。
+
+    UpdateSecurityGroupInVo in = new UpdateSecurityGroupInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    RuleIn rule = new RuleIn();
+    rule.setProto(ProtoEnum.UDP.name());
+    rule.setDst_port("22-88");
+    rule.setSrc_ip("0.0.0.0/0");
+    rule.setAction(RuleActionEnum.ACCEPT.name());
+    rule.setPriority(PriorityEnum.MIDDLE.getValue());
+    in.setRule_0(rule);
+    in.setGroupId(14881);
+
+    UpdateSecurityGroupOutVo out = client.exec(in, UpdateSecurityGroupOutVo.class);
+
+<a name="grantsecuritygroup"></a>
+### GrantSecurityGroup
+
+将防火墙应用到资源上
+
+    GrantSecurityGroupInVo in = new GrantSecurityGroupInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setGroupId(14251);
+    in.setResourceType(ResourceTypeEnum.uhost.name());
+    in.setResourceId("uhost-f1y3dd");
+
+    GrantSecurityGroupOutVo out = client.exec(in, GrantSecurityGroupOutVo.class);
+
+<a name="deletesecuritygroup"></a>
+### DeleteSecurityGroup
+
+删除防火墙
+
+    DeleteSecurityGroupInVo in = new DeleteSecurityGroupInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setGroupId(14884);
+
+    DeleteSecurityGroupOutVo out = client.exec(in, DeleteSecurityGroupOutVo.class);
+
