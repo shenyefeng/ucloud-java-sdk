@@ -7,27 +7,27 @@
 ## 目录
 * [准备] (#准备)
 * [云主机] (#云主机)
-  * [DescribeImage] (#describeImage)
-  * [CreateUHostInstance] (#createUHostInstance)
-  * [DescribeUHostInstance] (#describeUHostInstance)
-  * [TerminateUHostInstance] (#terminateUHostInstance)
-  * [ResizeUHostInstance] (#resizeUHostInstance)
-  * [ReinstallUHostInstance] (#reinstallUHostInstance)
-  * [StartUHostInstance] (#startUHostInstance)
-  * [StopUHostInstance] (#stopUHostInstance)
-  * [RebootUHostInstance] (#rebootUHostInstance)
-  * [ResetUHostInstancePassword] (#resetUHostInstancePassword)
-  * [ModifyUHostInstanceName] (#modifyUHostInstanceName)
-  * [ModifyUHostInstanceTag] (#modifyUHostInstanceTag)
-  * [ModifyUHostInstanceRemark] (#modifyUHostInstanceRemark)
-  * [GetUHostInstancePrice] (#getUHostInstancePrice)
-  * [GetUHostInstanceVncInfo] (#getUHostInstanceVncInfo)
-  * [CreateCustomImage] (#createCustomImage)
-  * [TerminateCustomImage] (#terminateCustomImage)
-  * [CreateUHostInstanceSnapshot] (#createUHostInstanceSnapshot)
-  * [DescribeUHostInstanceSnapshot] (#describeUHostInstanceSnapshot)
+  * [DescribeImage] (#describeimage)
+  * [CreateUHostInstance] (#createuhostinstance)
+  * [DescribeUHostInstance] (#describeuhostinstance)
+  * [TerminateUHostInstance] (#terminateuhostinstance)
+  * [ResizeUHostInstance] (#resizeuhostinstance)
+  * [ReinstallUHostInstance] (#reinstalluhostinstance)
+  * [StartUHostInstance] (#startuhostinstance)
+  * [StopUHostInstance] (#stopuhostinstance)
+  * [RebootUHostInstance] (#rebootuhostinstance)
+  * [ResetUHostInstancePassword] (#resetuhostinstancepassword)
+  * [ModifyUHostInstanceName] (#modifyuhostinstancename)
+  * [ModifyUHostInstanceTag] (#modifyuhostinstancetag)
+  * [ModifyUHostInstanceRemark] (#modifyuhostinstanceremark)
+  * [GetUHostInstancePrice] (#getuhostinstanceprice)
+  * [GetUHostInstanceVncInfo] (#getuhostinstancevncinfo)
+  * [CreateCustomImage] (#createcustomimage)
+  * [TerminateCustomImage] (#terminatecustomimage)
+  * [CreateUHostInstanceSnapshot] (#createuhostinstancesnapshot)
+  * [DescribeUHostInstanceSnapshot] (#describeuhostinstancesnapshot)
 * [云监控] (#云监控)
-  * [GetMetric] (#getMetric)
+  * [GetMetric] (#getmetric)
 
 ---
 
@@ -46,7 +46,7 @@
 <a name="云主机"></a>
 ### 云主机
 
-<a name="describeImage"></a>
+<a name="describeimage"></a>
 #### DescribeImage
 
 获取指定数据中心镜像列表，用户可通过指定镜像类型，操作系统类型，镜像Id进行过滤。
@@ -55,7 +55,7 @@
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     DescribeImageoutVo out = client.exec(in, DescribeImageoutVo.class);
 
-<a name="createUHostInstance"></a>
+<a name="createuhostinstance"></a>
 #### CreateUHostInstance
 
 指定数据中心，根据资源使用量创建指定数量的UHost实例。
@@ -71,7 +71,7 @@
     in.setChargeType(ChargeTypeEnum.Month.name());
     CreateUHostInstanceOutVo out = client.exec(in, CreateUHostInstanceOutVo.class);
 
-<a name="describeUHostInstance"></a>
+<a name="describeuhostinstance"></a>
 #### DescribeUHostInstance
 
 获取主机或主机列表信息，并可根据数据中心，主机ID等参数进行过滤。
@@ -81,7 +81,7 @@
     in.setuHostIds_0("uhost-f1y3dd");
     DescribeUHostInstanceOutVo out = client.exec(in, DescribeUHostInstanceOutVo.class);
 
-<a name="terminateUHostInstance"></a>
+<a name="terminateuhostinstance"></a>
 #### TerminateUHostInstance
 
 删除指定数据中心的UHost实例。
@@ -91,7 +91,7 @@
     in.setuHostId("uhost-f1y3dd");
     TerminateUHostInstanceOutVo out = client.exec(in, TerminateUHostInstanceOutVo.class);
 
-<a name="resizeUHostInstance"></a>
+<a name="resizeuhostinstance"></a>
 #### ResizeUHostInstance
 
 修改指定UHost实例的资源配置，如CPU核心数，内存容量大小，磁盘空间大小等。
@@ -104,7 +104,7 @@
     in.setDiskSpace(80);
     ResizeUHostInstanceOutVo out = client.exec(in, ResizeUHostInstanceOutVo.class);
 
-<a name="reinstallUHostInstance"></a>
+<a name="reinstalluhostinstance"></a>
 #### ReinstallUHostInstance
 
 重新安装指定UHost实例的操作系统
@@ -117,7 +117,7 @@
     in.setPassword("ucloud2345");
     ReinstallUHostInstanceOutVo out = client.exec(in, ReinstallUHostInstanceOutVo.class);
 
-<a name="startUHostInstance"></a>
+<a name="startuhostinstance"></a>
 #### StartUHostInstance
 
 启动处于关闭状态的UHost实例，需要指定数据中心及UHostID两个参数的值。
@@ -128,7 +128,7 @@
     StartUHostInstanceOutVo out = client.exec(in, StartUHostInstanceOutVo.class);
 
 
-<a name="stopUHostInstance"></a>
+<a name="stopuhostinstance"></a>
 #### StopUHostInstance
 
 指停止处于运行状态的UHost实例，需指定数据中心及UhostID。
@@ -138,7 +138,7 @@
     in.setuHostId("uhost-f1y3dd");
     StopUHostInstanceOutVo out = client.exec(in, StopUHostInstanceOutVo.class);
 
-<a name="rebootUHostInstance"></a>
+<a name="rebootuhostinstance"></a>
 #### RebootUHostInstance
 
 重新启动UHost实例，需要指定数据中心及UHostID两个参数的值。
@@ -148,7 +148,7 @@
     in.setuHostId("uhost-f1y3dd");
     RebootUHostInstanceOutVo out = client.exec(in, RebootUHostInstanceOutVo.class);
 
-<a name="resetUHostInstancePassword"></a>
+<a name="resetuhostinstancepassword"></a>
 #### ResetUHostInstancePassword
 
 重置UHost实例的管理员密码。
@@ -159,7 +159,7 @@
     in.setPassword("ucloud123456");
     ResetUHostInstancePasswordOutVo out = client.exec(in, ResetUHostInstancePasswordOutVo.class);
 
-<a name="modifyUHostInstanceName"></a>
+<a name="modifyuhostinstancename"></a>
 #### ModifyUHostInstanceName
 
 修改指定UHost实例名称，需要给出数据中心，UHostId，及新的实例名称。
@@ -170,7 +170,7 @@
     in.setName("ubuntu1204-001");
     ModifyUHostInstanceNameOutVo out = client.exec(in, ModifyUHostInstanceNameOutVo.class);
 
-<a name="modifyUHostInstanceTag"></a>
+<a name="modifyuhostinstancetag"></a>
 #### ModifyUHostInstanceTag
 
 修改指定UHost实例业务组标识。
@@ -181,7 +181,7 @@
     in.setTag("ubuntu1204-001-tag");
     ModifyUHostInstanceTagOutVo out = client.exec(in, ModifyUHostInstanceTagOutVo.class);
 
-<a name="modifyUHostInstanceRemark"></a>
+<a name="modifyuhostinstanceremark"></a>
 #### ModifyUHostInstanceRemark
 
 修改指定UHost实例备注信息。
@@ -192,7 +192,7 @@
     in.setRemark("ubuntu1204-001-remark");
     ModifyUHostInstanceRemarkOutVo out = client.exec(in, ModifyUHostInstanceRemarkOutVo.class);
 
-<a name="getUHostInstancePrice"></a>
+<a name="getuhostinstanceprice"></a>
 #### GetUHostInstancePrice
 
 根据UHost实例配置，获取UHost实例的价格。
@@ -209,7 +209,7 @@
         System.out.println(price.getPrice());
     }
 
-<a name="getUHostInstanceVncInfo"></a>
+<a name="getuhostinstancevncinfo"></a>
 #### GetUHostInstanceVncInfo
 
 获取指定UHost实例的管理VNC配置详细信息。
@@ -224,7 +224,7 @@
     System.out.println(out.getVncPort());
     System.out.println(out.getVncPassword());
 
-<a name="createCustomImage"></a>
+<a name="createcustomimage"></a>
 #### CreateCustomImage
 
 从指定UHost实例，生成自定义镜像。
@@ -237,7 +237,7 @@
     CreateCustomImageOutVo out = client.exec(in, CreateCustomImageOutVo.class);
     System.out.println(out.getImageId());
 
-<a name="terminateCustomImage"></a>
+<a name="terminatecustomimage"></a>
 #### TerminateCustomImage
 
 删除用户自定义镜像
@@ -247,7 +247,7 @@
     in.setImageId("uimage-4pitdj");
     TerminateCustomImageOutVo out = client.exec(in, TerminateCustomImageOutVo.class);
 
-<a name="createUHostInstanceSnapshot"></a>
+<a name="createuhostinstancesnapshot"></a>
 #### CreateUHostInstanceSnapshot
 
 对指定UHost实例制作数据快照。
@@ -257,7 +257,7 @@
     in.setuHostId("uhost-f1y3dd");
     CreateUHostInstanceSnapshotOutVo out = client.exec(in, CreateUHostInstanceSnapshotOutVo.class);
 
-<a name="describeUHostInstanceSnapshot"></a>
+<a name="describeuhostinstancesnapshot"></a>
 #### DescribeUHostInstanceSnapshot
 
 获取已经存在的UHost实例的存储快照列表。
@@ -272,7 +272,7 @@
 <a name="云监控"></a>
 ### 云监控
 
-<a name="getMetric"></a>
+<a name="getmetric"></a>
 #### GetMetric
 
 获取监控数据
