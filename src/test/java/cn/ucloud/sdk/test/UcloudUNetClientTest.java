@@ -152,8 +152,8 @@ public class UcloudUNetClientTest {
         BindEIPInVo in = new BindEIPInVo();
         in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-mmhr0f");
-        in.setResourceType(ResourceTypeEnum.uhost.name());
-        in.setResourceId("uhost-f1y3dd");
+        in.setResourceType(ResourceTypeEnum.ulb.name());
+        in.setResourceId("ulb-2t22s4");
 
         BindEIPOutVo out = client.exec(in, BindEIPOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
