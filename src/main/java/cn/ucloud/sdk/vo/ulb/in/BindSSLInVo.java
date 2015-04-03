@@ -14,21 +14,24 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo.ulb.out;
+package cn.ucloud.sdk.vo.ulb.in;
+
+import cn.ucloud.sdk.enums.ActionEnum;
+import cn.ucloud.sdk.vo.PageVo;
 
 /**
  * 
  * @author Jack shen<37393993@qq.com>
  * 
  */
-public class SSL {
+public class BindSSLInVo extends PageVo {
     private String sSLId;
-    private String sSLName;
-    private String sSLType;
-    private String sSLContent;
-    private String hashValue;
-    private Integer createTime;
+    private String uLBId;
     private String vServerId;
+
+    public BindSSLInVo() {
+        super(ActionEnum.BindSSL.name());
+    }
 
     public String getsSLId() {
         return sSLId;
@@ -38,44 +41,12 @@ public class SSL {
         this.sSLId = sSLId;
     }
 
-    public String getsSLName() {
-        return sSLName;
+    public String getuLBId() {
+        return uLBId;
     }
 
-    public void setsSLName(String sSLName) {
-        this.sSLName = sSLName;
-    }
-
-    public String getsSLType() {
-        return sSLType;
-    }
-
-    public void setsSLType(String sSLType) {
-        this.sSLType = sSLType;
-    }
-
-    public String getsSLContent() {
-        return sSLContent;
-    }
-
-    public void setsSLContent(String sSLContent) {
-        this.sSLContent = sSLContent;
-    }
-
-    public String getHashValue() {
-        return hashValue;
-    }
-
-    public void setHashValue(String hashValue) {
-        this.hashValue = hashValue;
-    }
-
-    public Integer getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Integer createTime) {
-        this.createTime = createTime;
+    public void setuLBId(String uLBId) {
+        this.uLBId = uLBId;
     }
 
     public String getvServerId() {
@@ -85,4 +56,5 @@ public class SSL {
     public void setvServerId(String vServerId) {
         this.vServerId = vServerId;
     }
+
 }

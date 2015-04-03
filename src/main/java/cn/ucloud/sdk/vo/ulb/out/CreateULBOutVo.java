@@ -24,13 +24,5 @@ import cn.ucloud.sdk.vo.UcloudOutVo;
  * 
  */
 public class CreateULBOutVo extends UcloudOutVo {
-    private String uLBId;
 
-    public String getuLBId() {
-        return uLBId;
-    }
-
-    public void setuLBId(String uLBId) {
-        this.uLBId = uLBId;
-    }
 }

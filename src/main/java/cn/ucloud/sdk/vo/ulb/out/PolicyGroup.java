@@ -16,32 +16,34 @@
 // under the License.
 package cn.ucloud.sdk.vo.ulb.out;
 
-public class Ip {
-    private String operatorName;
-    private String eIP;
-    private String eIPId;
+import java.util.Set;
 
-    public String getOperatorName() {
-        return operatorName;
+public class PolicyGroup {
+    private String groupId;
+    private String groupName;
+    private Set<Policy> policySet;
+
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
-    public String geteIP() {
-        return eIP;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void seteIP(String eIP) {
-        this.eIP = eIP;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    public String geteIPId() {
-        return eIPId;
+    public Set<Policy> getPolicySet() {
+        return policySet;
     }
 
-    public void seteIPId(String eIPId) {
-        this.eIPId = eIPId;
+    public void setPolicySet(Set<Policy> policySet) {
+        this.policySet = policySet;
     }
 }

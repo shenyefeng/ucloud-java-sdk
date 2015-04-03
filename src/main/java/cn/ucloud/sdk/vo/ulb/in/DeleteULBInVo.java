@@ -14,34 +14,28 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-package cn.ucloud.sdk.vo.ulb.out;
+package cn.ucloud.sdk.vo.ulb.in;
 
-public class Ip {
-    private String operatorName;
-    private String eIP;
-    private String eIPId;
+import cn.ucloud.sdk.enums.ActionEnum;
+import cn.ucloud.sdk.vo.PageVo;
 
-    public String getOperatorName() {
-        return operatorName;
+/**
+ * 
+ * @author Jack shen<37393993@qq.com>
+ * 
+ */
+public class DeleteULBInVo extends PageVo {
+    private String uLBId;
+
+    public DeleteULBInVo() {
+        super(ActionEnum.DeleteULB.name());
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName;
+    public String getuLBId() {
+        return uLBId;
     }
 
-    public String geteIP() {
-        return eIP;
-    }
-
-    public void seteIP(String eIP) {
-        this.eIP = eIP;
-    }
-
-    public String geteIPId() {
-        return eIPId;
-    }
-
-    public void seteIPId(String eIPId) {
-        this.eIPId = eIPId;
+    public void setuLBId(String uLBId) {
+        this.uLBId = uLBId;
     }
 }

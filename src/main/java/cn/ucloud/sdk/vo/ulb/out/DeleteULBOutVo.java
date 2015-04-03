@@ -16,32 +16,21 @@
 // under the License.
 package cn.ucloud.sdk.vo.ulb.out;
 
-public class Ip {
-    private String operatorName;
-    private String eIP;
-    private String eIPId;
+import cn.ucloud.sdk.vo.UcloudOutVo;
 
-    public String getOperatorName() {
-        return operatorName;
+/**
+ * 
+ * @author Jack shen<37393993@qq.com>
+ * 
+ */
+public class DeleteULBOutVo extends UcloudOutVo {
+    private String vServerId;
+
+    public String getvServerId() {
+        return vServerId;
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName;
-    }
-
-    public String geteIP() {
-        return eIP;
-    }
-
-    public void seteIP(String eIP) {
-        this.eIP = eIP;
-    }
-
-    public String geteIPId() {
-        return eIPId;
-    }
-
-    public void seteIPId(String eIPId) {
-        this.eIPId = eIPId;
+    public void setvServerId(String vServerId) {
+        this.vServerId = vServerId;
     }
 }
