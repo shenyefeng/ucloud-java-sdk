@@ -45,6 +45,27 @@
   * [UpdateSecurityGroup] (#updatesecuritygroup)
   * [GrantSecurityGroup] (#grantsecuritygroup)
   * [DeleteSecurityGroup] (#deletesecuritygroup)
+* [负载均衡] (#负载均衡)
+  * [CreateULB] (#createulb)
+  * [DeleteULB] (#deleteulb)
+  * [DescribeULB] (#describeulb)
+  * [UpdateULBAttribute] (#updateulbattribute)
+  * [CreateVServer] (#createvserver)
+  * [DeleteVServer] (#deletevserver)
+  * [UpdateVServerAttribute] (#updatevserverattribute)
+  * [AllocateBackend] (#allocatebackend)
+  * [ReleaseBackend] (#releasebackend)
+  * [UpdateBackendAttribute] (#updatebackendattribute)
+  * [CreateSSL] (#createssl)
+  * [DeleteSSL] (#deletessl)
+  * [BindSSL] (#bindssl)
+  * [DescribeSSL] (#describessl)
+  * [CreatePolicyGroup] (#createpolicygroup)
+  * [DeletePolicyGroup] (#deletepolicygroup)
+  * [DescribePolicyGroup] (#describepolicygroup)
+  * [UpdatePolicyGroupAttribute] (#updatepolicygroupattribute)
+  * [CreatePolicy] (#createpolicy)
+  * [DeletePolicy] (#deletepolicy)
 * [云监控] (#云监控)
   * [GetMetric] (#getmetric)
 
@@ -288,32 +309,6 @@
 
 ---
 
-<a name="云监控"></a>
-### 云监控
-
-<a name="getmetric"></a>
-#### GetMetric
-
-获取监控数据
-
-    GetMetricInVo in = new GetMetricInVo();
-    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-    in.setResourceType(ResourceTypeEnum.uhost.name());
-    in.setMetricName_0(MetricNameUhostEnum.CPUUtilization.name());
-    in.setMetricName_1(MetricNameUhostEnum.MemUsage.name());
-    in.setResourceId("uhost-f1y3dd");
-    GetMetricOutVo out = client.exec(in, GetMetricOutVo.class);
-    for (MetricDataDetail data : out.getDataSets().getcPUUtilization()) {
-        System.out.println(data.getTimestamp());
-        System.out.println(data.getValue());
-    }
-    for (MetricDataDetail data : out.getDataSets().getMemUsage()) {
-        System.out.println(data.getTimestamp());
-        System.out.println(data.getValue());
-    }
-    
----
-
 <a name="网络"></a>
 ### 网络
 
@@ -327,7 +322,7 @@
     in.setOperatorName(OperatorNameEnum.Bgp.name());
     in.setBandwidth(1);
     in.setChargeType(ChargeTypeEnum.Month.name());
-    
+
     AllocateEIPOutVo out = client.exec(in, AllocateEIPOutVo.class);
     for (EIP eip : out.geteIPSet()) {
         System.out.println(eip.geteIPId());
@@ -354,7 +349,7 @@
             System.out.println(addr.getOperatorName());
         }
     }
-    
+
 <a name="updateeipattribute"></a>
 ### UpdateEIPAttribute
 
@@ -366,7 +361,6 @@
     in.setName("eip name");
     in.setRemark("eip remark");
     in.setTag("eip tag");
-
     UpdateEIPAttributeOutVo out = client.exec(in, UpdateEIPAttributeOutVo.class);
 
 <a name="releaseeip"></a>
@@ -377,7 +371,6 @@
     ReleaseEIPInVo in = new ReleaseEIPInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.seteIPId("eip-n1hvdm");
-
     ReleaseEIPOutVo out = client.exec(in, ReleaseEIPOutVo.class);
 
 <a name="bindeip"></a>
@@ -390,7 +383,6 @@
     in.seteIPId("eip-mmhr0f");
     in.setResourceType(ResourceTypeEnum.ulb.name());
     in.setResourceId("ulb-2t22s4");
-
     BindEIPOutVo out = client.exec(in, BindEIPOutVo.class);
 
 <a name="unbindeip"></a>
@@ -403,7 +395,6 @@
     in.seteIPId("eip-mmhr0f");
     in.setResourceType(ResourceTypeEnum.uhost.name());
     in.setResourceId("uhost-f1y3dd");
-
     UnBindEIPOutVo out = client.exec(in, UnBindEIPOutVo.class);
 
 <a name="modifyeipbandwidth"></a>
@@ -415,7 +406,6 @@
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.seteIPId("eip-mmhr0f");
     in.setBandwidth(1);
-
     ModifyEIPBandwidthOutVo out = client.exec(in, ModifyEIPBandwidthOutVo.class);
 
 <a name="modifyeipweight"></a>
@@ -427,7 +417,6 @@
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.seteIPId("eip-mmhr0f");
     in.setWeight(2);
-
     ModifyEIPWeightOutVo out = client.exec(in, ModifyEIPWeightOutVo.class);
 
 <a name="geteipprice"></a>
@@ -440,7 +429,7 @@
     in.setOperatorName(OperatorNameEnum.Bgp.name());
     in.setBandwidth(1);
     in.setChargeType(ChargeTypeEnum.Month.name());
-    
+
     GetEIPPriceOutVo out = client.exec(in, GetEIPPriceOutVo.class);
     for(Price price : out.getPriceSet()) {
         System.out.println(price.getChargeType());
@@ -456,7 +445,6 @@
     AllocateVIPInVo in = new AllocateVIPInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.setCount(2);
-
     AllocateVIPOutVo out = client.exec(in, AllocateVIPOutVo.class);
 
 <a name="describevip"></a>
@@ -466,7 +454,6 @@
 
     DescribeVIPInVo in = new DescribeVIPInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
-
     DescribeVIPOutVo out = client.exec(in, DescribeVIPOutVo.class);
 
 <a name="releasevip"></a>
@@ -477,7 +464,6 @@
     ReleaseVIPInVo in = new ReleaseVIPInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.setvIP("10.10.74.26");
-
     ReleaseVIPOutVo out = client.exec(in, ReleaseVIPOutVo.class);
 
 <a name="describesecuritygroup"></a>
@@ -489,7 +475,6 @@
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.setResourceType(ResourceTypeEnum.uhost.name());
     in.setResourceId("uhost-f1y3dd");
-
     DescribeSecurityGroupOutVo out = client.exec(in, DescribeSecurityGroupOutVo.class);
 
 <a name="describesecuritygroupresource"></a>
@@ -500,7 +485,6 @@
     DescribeSecurityGroupResourceInVo in = new DescribeSecurityGroupResourceInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.setGroupId(14881);
-
     DescribeSecurityGroupResourceOutVo out = client.exec(in, DescribeSecurityGroupResourceOutVo.class);
 
 <a name="createsecuritygroup"></a>
@@ -519,7 +503,6 @@
     in.setRule_0(rule);
     in.setGroupName("sg name");
     in.setDescription("sg desc");
-
     CreateSecurityGroupOutVo out = client.exec(in, CreateSecurityGroupOutVo.class);
 
 <a name="updatesecuritygroup"></a>
@@ -538,7 +521,6 @@
     rule.setPriority(PriorityEnum.MIDDLE.getValue());
     in.setRule_0(rule);
     in.setGroupId(14881);
-
     UpdateSecurityGroupOutVo out = client.exec(in, UpdateSecurityGroupOutVo.class);
 
 <a name="grantsecuritygroup"></a>
@@ -551,7 +533,6 @@
     in.setGroupId(14251);
     in.setResourceType(ResourceTypeEnum.uhost.name());
     in.setResourceId("uhost-f1y3dd");
-
     GrantSecurityGroupOutVo out = client.exec(in, GrantSecurityGroupOutVo.class);
 
 <a name="deletesecuritygroup"></a>
@@ -562,6 +543,180 @@
     DeleteSecurityGroupInVo in = new DeleteSecurityGroupInVo();
     in.setRegion(DataCenterEnum.北京BGP_C.getValue());
     in.setGroupId(14884);
-
     DeleteSecurityGroupOutVo out = client.exec(in, DeleteSecurityGroupOutVo.class);
+---
 
+<a name="负载均衡"></a>
+### 负载均衡
+
+<a name="createulb"></a>### CreateULB
+创建负载均衡实例
+
+	CreateULBInVo in = new CreateULBInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBName("ulb name");
+	CreateULBOutVo out = client.exec(in, CreateULBOutVo.class);
+<a name="deleteulb"></a>### DeleteULB
+删除负载均衡实例
+
+	DeleteULBInVo in = new DeleteULBInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	DeleteULBOutVo out = client.exec(in, DeleteULBOutVo.class);
+<a name="describeulb"></a>### DescribeULB
+获取ULB详细信息
+
+	DescribeULBInVo in = new DescribeULBInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	DescribeULBOutVo out = client.exec(in, DescribeULBOutVo.class);
+<a name="updateulbattribute"></a>### UpdateULBAttribute
+修改ULB名字业务组备注等属性字段
+
+	UpdateULBAttributeInVo in = new UpdateULBAttributeInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setName("ulb name updated");
+	in.setTag("ulb tag updated");
+	in.setRemark("ulb remark updated");
+	UpdateULBAttributeOutVo out = client.exec(in, UpdateULBAttributeOutVo.class);
+<a name="createvserver"></a>### CreateVServer
+创建VServer实例
+
+	CreateVServerInVo in = new CreateVServerInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	CreateVServerOutVo out = client.exec(in, CreateVServerOutVo.class);
+<a name="deletevserver"></a>### DeleteVServer
+删除VServer实例
+
+	DeleteVServerInVo in = new DeleteVServerInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
+	DeleteVServerOutVo out = client.exec(in, DeleteVServerOutVo.class);
+<a name="updatevserverattribute"></a>### UpdateVServerAttribute
+修改VServer实例属性
+
+	UpdateVServerAttributeInVo in = new UpdateVServerAttributeInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
+	in.setMethod(VServerMethodEnum.Source.name());
+	UpdateVServerAttributeOutVo out = client.exec(in, UpdateVServerAttributeOutVo.class);
+<a name="allocatebackend"></a>### AllocateBackend
+添加ULB后端资源实例
+
+	AllocateBackendInVo in = new AllocateBackendInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
+	in.setResourceType("UHost"/* ResourceTypeEnum.uhost.name() */);
+	in.setResourceId("uhost-f1y3dd");
+	AllocateBackendOutVo out = client.exec(in, AllocateBackendOutVo.class);
+<a name="releasebackend"></a>### ReleaseBackend
+释放ULB后端资源实例
+
+	ReleaseBackendInVo in = new ReleaseBackendInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setBackendId("f174c09c-b8ee-4d2d-99e3-284a7673da82");
+	ReleaseBackendOutVo out = client.exec(in, ReleaseBackendOutVo.class);
+<a name="updatebackendattribute"></a>### UpdateBackendAttribute
+修改ULB后端资源实例(主机池)属性
+
+	UpdateBackendAttributeInVo in = new UpdateBackendAttributeInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setBackendId("f174c09c-b8ee-4d2d-99e3-284a7673da82");
+	UpdateBackendAttributeOutVo out = client.exec(in, UpdateBackendAttributeOutVo.class);
+<a name="createssl"></a>### CreateSSL
+添加SSL证书
+
+	CreateSSLInVo in = new CreateSSLInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setsSLName("ssl name");
+	in.setsSLContent("");
+	CreateSSLOutVo out = client.exec(in, CreateSSLOutVo.class);
+<a name="deletessl"></a>### DeleteSSL
+删除SSL证书
+<a name="bindssl"></a>### BindSSL
+将SSL证书绑定到VServer
+<a name="describessl"></a>### DescribeSSL
+显示SSL证书信息
+<a name="createpolicygroup"></a>### CreatePolicyGroup
+创建内容转发策略组
+
+	CreatePolicyGroupInVo in = new CreatePolicyGroupInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setGroupName("PolicyGroup name");
+	CreatePolicyGroupOutVo out = client.exec(in, CreatePolicyGroupOutVo.class);
+<a name="deletepolicygroup"></a>### DeletePolicyGroup
+删除内容转发策略组
+
+	DeletePolicyGroupInVo in = new DeletePolicyGroupInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setGroupId("ulb-fr-krbaoc");
+	DeletePolicyGroupOutVo out = client.exec(in, DeletePolicyGroupOutVo.class);
+<a name="describepolicygroup"></a>### DescribePolicyGroup
+显示内容转发策略组详情
+
+	DescribePolicyGroupInVo in = new DescribePolicyGroupInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setGroupId("ulb-fr-krbaoc");
+	DescribePolicyGroupOutVo out = client.exec(in, DescribePolicyGroupOutVo.class);
+<a name="updatepolicygroupattribute"></a>### UpdatePolicyGroupAttribute
+修改内容转发策略组配置信息
+
+	UpdatePolicyGroupAttributeInVo in = new UpdatePolicyGroupAttributeInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setGroupId("ulb-fr-krbaoc");
+	in.setGroupName("PolicyGroup name updated");
+	UpdatePolicyGroupAttributeOutVo out = client.exec(in, UpdatePolicyGroupAttributeOutVo.class);
+<a name="createpolicy"></a>### CreatePolicy
+创建内容转发策略
+
+	CreatePolicyInVo in = new CreatePolicyInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setuLBId("ulb-2t22s4");
+	in.setGroupId("ulb-fr-krbaoc");
+	in.setMatch("match word");
+	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
+	in.setBackendId_0("f174c09c-b8ee-4d2d-99e3-284a7673da82");
+	CreatePolicyOutVo out = client.exec(in, CreatePolicyOutVo.class);
+<a name="deletepolicy"></a>### DeletePolicy
+删除内容转发策略
+
+	DeletePolicyInVo in = new DeletePolicyInVo();
+	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+	in.setGroupId("ulb-fr-krbaoc");
+	in.setPolicyId("84dfd3ae-4217-4197-94b1-87c0141b1b71");
+	DeletePolicyOutVo out = client.exec(in, DeletePolicyOutVo.class);
+
+---
+
+<a name="云监控"></a>
+### 云监控
+
+<a name="getmetric"></a>
+#### GetMetric
+
+获取监控数据
+
+    GetMetricInVo in = new GetMetricInVo();
+    in.setRegion(DataCenterEnum.北京BGP_C.getValue());
+    in.setResourceType(ResourceTypeEnum.uhost.name());
+    in.setMetricName_0(MetricNameUhostEnum.CPUUtilization.name());
+    in.setMetricName_1(MetricNameUhostEnum.MemUsage.name());
+    in.setResourceId("uhost-f1y3dd");
+    GetMetricOutVo out = client.exec(in, GetMetricOutVo.class);
+    for (MetricDataDetail data : out.getDataSets().getcPUUtilization()) {
+        System.out.println(data.getTimestamp());
+        System.out.println(data.getValue());
+    }
+    for (MetricDataDetail data : out.getDataSets().getMemUsage()) {
+        System.out.println(data.getTimestamp());
+        System.out.println(data.getValue());
+    }
+
+---
