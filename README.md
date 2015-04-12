@@ -1,5 +1,5 @@
 # UCLOUD-JAVA-SDK
-## 一个使用Apache HttpClient的简单易用易扩展的Java SDK
+## 一个使用Apache HttpClient的简单、易用、易扩展的Java SDK
 ---
 
 基于 [UCLOUD HTTP REST API接口](http://docs.ucloud.cn/api/index.html)开发，适用于Java 5及以上版本。
@@ -549,28 +549,35 @@
 <a name="负载均衡"></a>
 ### 负载均衡
 
-<a name="createulb"></a>### CreateULB
+<a name="createulb"></a>
+### CreateULB
 创建负载均衡实例
 
 	CreateULBInVo in = new CreateULBInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setuLBName("ulb name");
 	CreateULBOutVo out = client.exec(in, CreateULBOutVo.class);
-<a name="deleteulb"></a>### DeleteULB
+
+<a name="deleteulb"></a>
+### DeleteULB
 删除负载均衡实例
 
 	DeleteULBInVo in = new DeleteULBInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setuLBId("ulb-2t22s4");
 	DeleteULBOutVo out = client.exec(in, DeleteULBOutVo.class);
-<a name="describeulb"></a>### DescribeULB
+
+<a name="describeulb"></a>
+### DescribeULB
 获取ULB详细信息
 
 	DescribeULBInVo in = new DescribeULBInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setuLBId("ulb-2t22s4");
 	DescribeULBOutVo out = client.exec(in, DescribeULBOutVo.class);
-<a name="updateulbattribute"></a>### UpdateULBAttribute
+
+<a name="updateulbattribute"></a>
+### UpdateULBAttribute
 修改ULB名字业务组备注等属性字段
 
 	UpdateULBAttributeInVo in = new UpdateULBAttributeInVo();
@@ -580,14 +587,18 @@
 	in.setTag("ulb tag updated");
 	in.setRemark("ulb remark updated");
 	UpdateULBAttributeOutVo out = client.exec(in, UpdateULBAttributeOutVo.class);
-<a name="createvserver"></a>### CreateVServer
+
+<a name="createvserver"></a>
+### CreateVServer
 创建VServer实例
 
 	CreateVServerInVo in = new CreateVServerInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setuLBId("ulb-2t22s4");
 	CreateVServerOutVo out = client.exec(in, CreateVServerOutVo.class);
-<a name="deletevserver"></a>### DeleteVServer
+
+<a name="deletevserver"></a>
+### DeleteVServer
 删除VServer实例
 
 	DeleteVServerInVo in = new DeleteVServerInVo();
@@ -595,7 +606,9 @@
 	in.setuLBId("ulb-2t22s4");
 	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
 	DeleteVServerOutVo out = client.exec(in, DeleteVServerOutVo.class);
-<a name="updatevserverattribute"></a>### UpdateVServerAttribute
+
+<a name="updatevserverattribute"></a>
+### UpdateVServerAttribute
 修改VServer实例属性
 
 	UpdateVServerAttributeInVo in = new UpdateVServerAttributeInVo();
@@ -604,7 +617,9 @@
 	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
 	in.setMethod(VServerMethodEnum.Source.name());
 	UpdateVServerAttributeOutVo out = client.exec(in, UpdateVServerAttributeOutVo.class);
-<a name="allocatebackend"></a>### AllocateBackend
+
+<a name="allocatebackend"></a>
+### AllocateBackend
 添加ULB后端资源实例
 
 	AllocateBackendInVo in = new AllocateBackendInVo();
@@ -614,7 +629,9 @@
 	in.setResourceType("UHost"/* ResourceTypeEnum.uhost.name() */);
 	in.setResourceId("uhost-f1y3dd");
 	AllocateBackendOutVo out = client.exec(in, AllocateBackendOutVo.class);
-<a name="releasebackend"></a>### ReleaseBackend
+
+<a name="releasebackend"></a>
+### ReleaseBackend
 释放ULB后端资源实例
 
 	ReleaseBackendInVo in = new ReleaseBackendInVo();
@@ -622,7 +639,9 @@
 	in.setuLBId("ulb-2t22s4");
 	in.setBackendId("f174c09c-b8ee-4d2d-99e3-284a7673da82");
 	ReleaseBackendOutVo out = client.exec(in, ReleaseBackendOutVo.class);
-<a name="updatebackendattribute"></a>### UpdateBackendAttribute
+
+<a name="updatebackendattribute"></a>
+### UpdateBackendAttribute
 修改ULB后端资源实例(主机池)属性
 
 	UpdateBackendAttributeInVo in = new UpdateBackendAttributeInVo();
@@ -630,7 +649,9 @@
 	in.setuLBId("ulb-2t22s4");
 	in.setBackendId("f174c09c-b8ee-4d2d-99e3-284a7673da82");
 	UpdateBackendAttributeOutVo out = client.exec(in, UpdateBackendAttributeOutVo.class);
-<a name="createssl"></a>### CreateSSL
+
+<a name="createssl"></a>
+### CreateSSL
 添加SSL证书
 
 	CreateSSLInVo in = new CreateSSLInVo();
@@ -638,34 +659,48 @@
 	in.setsSLName("ssl name");
 	in.setsSLContent("");
 	CreateSSLOutVo out = client.exec(in, CreateSSLOutVo.class);
-<a name="deletessl"></a>### DeleteSSL
+
+<a name="deletessl"></a>
+### DeleteSSL
 删除SSL证书
-<a name="bindssl"></a>### BindSSL
+
+<a name="bindssl"></a>
+### BindSSL
 将SSL证书绑定到VServer
-<a name="describessl"></a>### DescribeSSL
+
+<a name="describessl"></a>
+### DescribeSSL
 显示SSL证书信息
-<a name="createpolicygroup"></a>### CreatePolicyGroup
+
+<a name="createpolicygroup"></a>
+### CreatePolicyGroup
 创建内容转发策略组
 
 	CreatePolicyGroupInVo in = new CreatePolicyGroupInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setGroupName("PolicyGroup name");
 	CreatePolicyGroupOutVo out = client.exec(in, CreatePolicyGroupOutVo.class);
-<a name="deletepolicygroup"></a>### DeletePolicyGroup
+
+<a name="deletepolicygroup"></a>
+### DeletePolicyGroup
 删除内容转发策略组
 
 	DeletePolicyGroupInVo in = new DeletePolicyGroupInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setGroupId("ulb-fr-krbaoc");
 	DeletePolicyGroupOutVo out = client.exec(in, DeletePolicyGroupOutVo.class);
-<a name="describepolicygroup"></a>### DescribePolicyGroup
+
+<a name="describepolicygroup"></a>
+### DescribePolicyGroup
 显示内容转发策略组详情
 
 	DescribePolicyGroupInVo in = new DescribePolicyGroupInVo();
 	in.setRegion(DataCenterEnum.北京BGP_C.getValue());
 	in.setGroupId("ulb-fr-krbaoc");
 	DescribePolicyGroupOutVo out = client.exec(in, DescribePolicyGroupOutVo.class);
-<a name="updatepolicygroupattribute"></a>### UpdatePolicyGroupAttribute
+
+<a name="updatepolicygroupattribute"></a>
+### UpdatePolicyGroupAttribute
 修改内容转发策略组配置信息
 
 	UpdatePolicyGroupAttributeInVo in = new UpdatePolicyGroupAttributeInVo();
@@ -673,7 +708,9 @@
 	in.setGroupId("ulb-fr-krbaoc");
 	in.setGroupName("PolicyGroup name updated");
 	UpdatePolicyGroupAttributeOutVo out = client.exec(in, UpdatePolicyGroupAttributeOutVo.class);
-<a name="createpolicy"></a>### CreatePolicy
+
+<a name="createpolicy"></a>
+### CreatePolicy
 创建内容转发策略
 
 	CreatePolicyInVo in = new CreatePolicyInVo();
@@ -684,7 +721,9 @@
 	in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
 	in.setBackendId_0("f174c09c-b8ee-4d2d-99e3-284a7673da82");
 	CreatePolicyOutVo out = client.exec(in, CreatePolicyOutVo.class);
-<a name="deletepolicy"></a>### DeletePolicy
+
+<a name="deletepolicy"></a>
+### DeletePolicy
 删除内容转发策略
 
 	DeletePolicyInVo in = new DeletePolicyInVo();
