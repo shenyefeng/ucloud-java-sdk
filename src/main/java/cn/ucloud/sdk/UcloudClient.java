@@ -38,6 +38,11 @@ public class UcloudClient {
     private final String publicKey;
     private final String privateKey;
 
+    /**
+     * constructor
+     * @param publicKey
+     * @param privateKey
+     */
     private UcloudClient(String publicKey, String privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
