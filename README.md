@@ -78,9 +78,16 @@
 大家可以登录[UCLOUD主站](http://www.ucloud.cn/)，开启虚拟化之旅。具体教程请参见[“文档中心”](http://docs.ucloud.cn/index.html)。
 
 ##### 初始化UcloudClient
+有2种方式初始化UcloudClient：
+1. 指定公钥和密钥
     UcloudClient client = UcloudClient.newClient("您的UCLOUD公钥", "您的UCLOUD密钥");
+    
+2. 指定数据中心、公钥和密钥
+    UcloudClient client = UcloudClient.newClient("数据中心", "您的UCLOUD公钥", "您的UCLOUD密钥");
 
 若不了解`公钥和密钥`，请参见[“公钥和密钥”](https://consolev3.ucloud.cn/apikey)
+若不了解`数据中心`，请参见[“数据中心列表”](http://docs.ucloud.cn/api/regionlist.html)
+如果指定了数据中心，XxxInVo中就不需要设置数据中心。
 
 ---
 <a name="云主机"></a>

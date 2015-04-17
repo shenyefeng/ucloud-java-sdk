@@ -16,10 +16,6 @@
 // under the License.
 package cn.ucloud.sdk.test;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.TreeMap;
-
 import junit.framework.Assert;
 
 import org.junit.After;
@@ -31,7 +27,6 @@ import org.junit.Test;
 import cn.ucloud.sdk.UcloudClient;
 import cn.ucloud.sdk.enums.ChargeTypeEnum;
 import cn.ucloud.sdk.enums.DataCenterEnum;
-import cn.ucloud.sdk.utils.SignatureUtils;
 import cn.ucloud.sdk.vo.udisk.in.AttachUdiskInVo;
 import cn.ucloud.sdk.vo.udisk.in.CloneUDiskInVo;
 import cn.ucloud.sdk.vo.udisk.in.CloneUDiskSnapshotInVo;
@@ -87,44 +82,11 @@ public class UcloudUDiskClientTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
-    public void testSignature() {
-
-        TreeMap<String, Object> map = new TreeMap<String, Object>();
-        map.put("Action", "CreateUHostInstance");
-        map.put("Region", "cn-north-01");
-        map.put("ImageId", "f43736e1-65a5-4bea-ad2e-8a46e18883c2");
-        map.put("CPU", 2);
-        map.put("Memory", 2048);
-        map.put("Password", "UCloudexample01");
-        map.put("DiskSpace", 10);
-        map.put("LoginMode", "Password");
-        map.put("Name", "Host01");
-        map.put("ChargeType", "Month");
-        map.put("Quantity", 1);
-        map.put("PublicKey", "ucloudsomeone@example.com1296235120854146120");
-        String res = SignatureUtils.signature("46f09bb9fab4f12dfc160dae12273d5332b5debe", map);
-
-        String paramEncoded = "?";
-        for (String key : map.keySet()) {
-            try {
-                paramEncoded += key + "=" + URLEncoder.encode(map.get(key) + "", "utf-8") + "&";
-            } catch (UnsupportedEncodingException e) {
-            }
-        }
-
-        paramEncoded = paramEncoded.substring(0, paramEncoded.length() - 1);
-        paramEncoded += "&Signature=7a517649e4e9da3b6c82c932d667daa1599ae3a1";
-
-        Assert.assertEquals(paramEncoded, res);
-    }
-
-    UcloudClient client = UcloudClient.newClient("ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
+    UcloudClient client = UcloudClient.newClient(DataCenterEnum.北京BGP_C.getValue(), "ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
 
     @Test
     public void testCreateUDisk() {
         CreateUDiskInVo in = new CreateUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setSize(1);
         in.setName("udisk-name1");
         in.setChargeType(ChargeTypeEnum.Month.name());
@@ -135,7 +97,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testCloneUDisk() {
         CloneUDiskInVo in = new CloneUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setName("udisk-name1");
         in.setSourceId("bs-ds00o2");
         in.setSize(1);
@@ -147,7 +108,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testAttachUdisk() {
         AttachUdiskInVo in = new AttachUdiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setuDiskId("bs-2khsfm");
         AttachUdiskOutVo out = client.exec(in, AttachUdiskOutVo.class);
@@ -157,7 +117,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDetachUdisk() {
         DetachUdiskInVo in = new DetachUdiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setuDiskId("bs-2khsfm");
         DetachUdiskOutVo out = client.exec(in, DetachUdiskOutVo.class);
@@ -167,7 +126,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDescribeUDisk() {
         DescribeUDiskInVo in = new DescribeUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuDiskId("bs-2khsfm");
         DescribeUDiskOutVo out = client.exec(in, DescribeUDiskOutVo.class);
         System.out.println(out.getTotalCount());
@@ -190,7 +148,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDescribeUDiskUpgradePrice() {
         DescribeUDiskUpgradePriceInVo in = new DescribeUDiskUpgradePriceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setSourceId("bs-2khsfm");
         in.setSize(10);
         DescribeUDiskUpgradePriceOutVo out = client.exec(in, DescribeUDiskUpgradePriceOutVo.class);
@@ -201,7 +158,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testRenameUDisk() {
         RenameUDiskInVo in = new RenameUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuDiskId("bs-2khsfm");
         in.setuDiskName("udisk-new-name");
         RenameUDiskOutVo out = client.exec(in, RenameUDiskOutVo.class);
@@ -211,7 +167,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testResizeUDisk() {
         ResizeUDiskInVo in = new ResizeUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuDiskId("bs-2khsfm");
         in.setSize(2);
         ResizeUDiskOutVo out = client.exec(in, ResizeUDiskOutVo.class);
@@ -221,7 +176,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDescribeUDiskPrice() {
         DescribeUDiskPriceInVo in = new DescribeUDiskPriceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setSize(10);
         in.setChargeType(ChargeTypeEnum.Month.name());
         DescribeUDiskPriceOutVo out = client.exec(in, DescribeUDiskPriceOutVo.class);
@@ -235,7 +189,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDeleteUDisk() {
         DeleteUDiskInVo in = new DeleteUDiskInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuDiskId("bs-rb1nl1");
         DeleteUDiskOutVo out = client.exec(in, DeleteUDiskOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -244,7 +197,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testCreateUDiskSnapshot() {
         CreateUDiskSnapshotInVo in = new CreateUDiskSnapshotInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuDiskId("bs-2khsfm");
         in.setChargeType(ChargeTypeEnum.Month.name());
         in.setName("udisk-snapshot-name");
@@ -256,7 +208,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testCloneUDiskSnapshot() {
         CloneUDiskSnapshotInVo in = new CloneUDiskSnapshotInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setName("udisk-snapshot-name");
         in.setSourceId("snap-5qokce");
         in.setSize(1);
@@ -269,7 +220,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDescribeUDiskSnapshot() {
         DescribeUDiskSnapshotInVo in = new DescribeUDiskSnapshotInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setSnapshotId("snap-keynvt");
         DescribeUDiskSnapshotOutVo out = client.exec(in, DescribeUDiskSnapshotOutVo.class);
         System.out.println(out.getTotalCount());
@@ -290,7 +240,6 @@ public class UcloudUDiskClientTest {
     @Test
     public void testDeleteUDiskSnapshot() {
         DeleteUDiskSnapshotInVo in = new DeleteUDiskSnapshotInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setSnapshotId("snap-p52tfc");
         DeleteUDiskSnapshotOutVo out = client.exec(in, DeleteUDiskSnapshotOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());

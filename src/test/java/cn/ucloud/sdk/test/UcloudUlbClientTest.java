@@ -85,12 +85,11 @@ public class UcloudUlbClientTest {
     public void tearDown() throws Exception {
     }
 
-    UcloudClient client = UcloudClient.newClient("ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
+    UcloudClient client = UcloudClient.newClient(DataCenterEnum.北京BGP_C.getValue(), "ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
 
     @Test
     public void testCreateULB() {
         CreateULBInVo in = new CreateULBInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBName("ulb name");
 
         CreateULBOutVo out = client.exec(in, CreateULBOutVo.class);
@@ -100,7 +99,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testUpdateULBAttribute() {
         UpdateULBAttributeInVo in = new UpdateULBAttributeInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setName("ulb name updated");
         in.setTag("ulb tag updated");
@@ -113,7 +111,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testDescribeULB() {
         DescribeULBInVo in = new DescribeULBInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
 
         DescribeULBOutVo out = client.exec(in, DescribeULBOutVo.class);
@@ -123,7 +120,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testDeleteULB() {
         DeleteULBInVo in = new DeleteULBInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
 
         DeleteULBOutVo out = client.exec(in, DeleteULBOutVo.class);
@@ -133,7 +129,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testCreateVServer() {
         CreateVServerInVo in = new CreateVServerInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
 
         CreateVServerOutVo out = client.exec(in, CreateVServerOutVo.class);
@@ -143,7 +138,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testUpdateVServerAttribute() {
         UpdateVServerAttributeInVo in = new UpdateVServerAttributeInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
         in.setMethod(VServerMethodEnum.Source.name());
@@ -155,7 +149,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testDeleteVServer() {
         DeleteVServerInVo in = new DeleteVServerInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
 
@@ -166,7 +159,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testAllocateBackend() {
         AllocateBackendInVo in = new AllocateBackendInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setvServerId("875a4804-4076-42e0-889d-8c5b1018046f");
         in.setResourceType("UHost"/* ResourceTypeEnum.uhost.name() */);
@@ -179,7 +171,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testUpdateBackendAttribute() {
         UpdateBackendAttributeInVo in = new UpdateBackendAttributeInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setBackendId("f174c09c-b8ee-4d2d-99e3-284a7673da82");
 
@@ -190,7 +181,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testReleaseBackend() {
         ReleaseBackendInVo in = new ReleaseBackendInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setBackendId("f174c09c-b8ee-4d2d-99e3-284a7673da82");
 
@@ -201,7 +191,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testCreatePolicyGroup() {
         CreatePolicyGroupInVo in = new CreatePolicyGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupName("PolicyGroup name");
 
         CreatePolicyGroupOutVo out = client.exec(in, CreatePolicyGroupOutVo.class);
@@ -211,7 +200,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testDescribePolicyGroup() {
         DescribePolicyGroupInVo in = new DescribePolicyGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId("ulb-fr-krbaoc");
 
         DescribePolicyGroupOutVo out = client.exec(in, DescribePolicyGroupOutVo.class);
@@ -221,7 +209,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testUpdatePolicyGroupAttribute() {
         UpdatePolicyGroupAttributeInVo in = new UpdatePolicyGroupAttributeInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId("ulb-fr-krbaoc");
         in.setGroupName("PolicyGroup name updated");
 
@@ -232,7 +219,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testDeletePolicyGroup() {
         DeletePolicyGroupInVo in = new DeletePolicyGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId("ulb-fr-krbaoc");
 
         DeletePolicyGroupOutVo out = client.exec(in, DeletePolicyGroupOutVo.class);
@@ -242,7 +228,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testCreatePolicy() {
         CreatePolicyInVo in = new CreatePolicyInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuLBId("ulb-2t22s4");
         in.setGroupId("ulb-fr-krbaoc");
         in.setMatch("match word");
@@ -256,7 +241,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testDeletePolicy() {
         DeletePolicyInVo in = new DeletePolicyInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId("ulb-fr-krbaoc");
         in.setPolicyId("84dfd3ae-4217-4197-94b1-87c0141b1b71");
 
@@ -268,7 +252,6 @@ public class UcloudUlbClientTest {
     @Test
     public void testCreateSSL() {
         CreateSSLInVo in = new CreateSSLInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setsSLName("ssl name");
         in.setsSLContent("");
 

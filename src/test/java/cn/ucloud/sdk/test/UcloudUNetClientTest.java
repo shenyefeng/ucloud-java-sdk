@@ -96,12 +96,11 @@ public class UcloudUNetClientTest {
     public void tearDown() throws Exception {
     }
 
-    UcloudClient client = UcloudClient.newClient("ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
+    UcloudClient client = UcloudClient.newClient(DataCenterEnum.北京BGP_C.getValue(), "ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
 
     @Test
     public void testAllocateEIP() {
         AllocateEIPInVo in = new AllocateEIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setOperatorName(OperatorNameEnum.Bgp.name());
         in.setBandwidth(1);
         in.setChargeType(ChargeTypeEnum.Month.name());
@@ -120,7 +119,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testDescribeEIP() {
         DescribeEIPInVo in = new DescribeEIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPIds_0("eip-mmhr0f");
 
         DescribeEIPOutVo out = client.exec(in, DescribeEIPOutVo.class);
@@ -137,7 +135,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testUpdateEIPAttribute() {
         UpdateEIPAttributeInVo in = new UpdateEIPAttributeInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-mmhr0f");
         in.setName("eip name");
         in.setRemark("eip remark");
@@ -150,7 +147,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testBindEIPAttribute() {
         BindEIPInVo in = new BindEIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-mmhr0f");
         in.setResourceType(ResourceTypeEnum.ulb.name());
         in.setResourceId("ulb-2t22s4");
@@ -162,7 +158,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testUnBindEIPAttribute() {
         UnBindEIPInVo in = new UnBindEIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-mmhr0f");
         in.setResourceType(ResourceTypeEnum.uhost.name());
         in.setResourceId("uhost-f1y3dd");
@@ -174,7 +169,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testModifyEIPBandwidth() {
         ModifyEIPBandwidthInVo in = new ModifyEIPBandwidthInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-mmhr0f");
         in.setBandwidth(1);
 
@@ -185,7 +179,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testModifyEIPWeight() {
         ModifyEIPWeightInVo in = new ModifyEIPWeightInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-mmhr0f");
         in.setWeight(2);
 
@@ -196,7 +189,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testGetEIPPrice() {
         GetEIPPriceInVo in = new GetEIPPriceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setOperatorName(OperatorNameEnum.Bgp.name());
         in.setBandwidth(1);
         in.setChargeType(ChargeTypeEnum.Month.name());
@@ -213,7 +205,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testReleaseEIP() {
         ReleaseEIPInVo in = new ReleaseEIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.seteIPId("eip-n1hvdm");
 
         ReleaseEIPOutVo out = client.exec(in, ReleaseEIPOutVo.class);
@@ -223,7 +214,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testAllocateVIP() {
         AllocateVIPInVo in = new AllocateVIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setCount(2);
 
         AllocateVIPOutVo out = client.exec(in, AllocateVIPOutVo.class);
@@ -242,7 +232,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testReleaseVIP() {
         ReleaseVIPInVo in = new ReleaseVIPInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setvIP("10.10.74.26");
 
         ReleaseVIPOutVo out = client.exec(in, ReleaseVIPOutVo.class);
@@ -252,7 +241,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testCreateSecurityGroup() {
         CreateSecurityGroupInVo in = new CreateSecurityGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         RuleIn rule = new RuleIn();
         rule.setProto(ProtoEnum.TCP.name());
         rule.setDst_port("22-80");
@@ -270,7 +258,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testUpdateSecurityGroup() {
         UpdateSecurityGroupInVo in = new UpdateSecurityGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         RuleIn rule = new RuleIn();
         rule.setProto(ProtoEnum.UDP.name());
         rule.setDst_port("22-88");
@@ -287,7 +274,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testGrantSecurityGroup() {
         GrantSecurityGroupInVo in = new GrantSecurityGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId(14251);
         in.setResourceType(ResourceTypeEnum.uhost.name());
         in.setResourceId("uhost-f1y3dd");
@@ -311,7 +297,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testDescribeSecurityGroupResource() {
         DescribeSecurityGroupResourceInVo in = new DescribeSecurityGroupResourceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId(14881);
 
         DescribeSecurityGroupResourceOutVo out = client.exec(in, DescribeSecurityGroupResourceOutVo.class);
@@ -321,7 +306,6 @@ public class UcloudUNetClientTest {
     @Test
     public void testDeleteSecurityGroup() {
         DeleteSecurityGroupInVo in = new DeleteSecurityGroupInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setGroupId(14884);
 
         DeleteSecurityGroupOutVo out = client.exec(in, DeleteSecurityGroupOutVo.class);

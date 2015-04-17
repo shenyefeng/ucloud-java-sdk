@@ -35,6 +35,7 @@ public class UcloudClient {
     private static final Logger logger = Logger.getLogger(UcloudClient.class);
 
     private final String apiUrl;
+    private final String region;
     private final String publicKey;
     private final String privateKey;
 
@@ -43,14 +44,19 @@ public class UcloudClient {
      * @param publicKey
      * @param privateKey
      */
-    private UcloudClient(String publicKey, String privateKey) {
+    private UcloudClient(String region, String publicKey, String privateKey) {
+        this.region = region;
         this.publicKey = publicKey;
         this.privateKey = privateKey;
         apiUrl = PropertiesUtils.getProperty("api_url");
     }
 
     public static UcloudClient newClient(String publicKey, String privateKey) {
-        return new UcloudClient(publicKey, privateKey);
+        return new UcloudClient(null, publicKey, privateKey);
+    }
+
+    public static UcloudClient newClient(String region, String publicKey, String privateKey) {
+        return new UcloudClient(region, publicKey, privateKey);
     }
 
     public <T> T exec(UcloudInVo inVo, Class<T> type) {
@@ -58,6 +64,9 @@ public class UcloudClient {
     }
     
     private String execute(UcloudInVo vo) {
+        if(vo.getRegion() == null || vo.getRegion().length() == 0) {
+            vo.setRegion(region);
+        }
         vo.setPublicKey(publicKey);
         TreeMap<String, Object> map = VoUtils.genMap(vo);
         String param = SignatureUtils.signature(privateKey, map);

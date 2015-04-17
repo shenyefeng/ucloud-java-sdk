@@ -128,12 +128,11 @@ public class UcloudUhostClientTest {
         Assert.assertEquals(paramEncoded, res);
     }
 
-    UcloudClient client = UcloudClient.newClient("ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
+    UcloudClient client = UcloudClient.newClient(DataCenterEnum.北京BGP_C.getValue(), "ucloud37393993@qq.com1427084764000315652657", "cda1127f34c284e992c02c79c3f9ed5edbc5b354");
 
     @Test
     public void testDescribeImage() {
         DescribeImageInVo in = new DescribeImageInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         DescribeImageoutVo out = client.exec(in, DescribeImageoutVo.class);
         System.out.println(out.getTotalCount());
         Assert.assertNotNull(out.getImageSet());
@@ -143,7 +142,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testCreateUHostInstance() {
         CreateUHostInstanceInVo in = new CreateUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setImageId("e36b3acf76663067684332055ade6bae");
         in.setLoginMode(LoginModeEnum.Password.name());
         in.setPassword("ucloud12345");
@@ -158,7 +156,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testDescribeUHostInstance() {
         DescribeUHostInstanceInVo in = new DescribeUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         // in.setuHostIds_0("uhost-f1y3dd");
         DescribeUHostInstanceOutVo out = client.exec(in, DescribeUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -167,7 +164,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testStopUHostInstance() {
         StopUHostInstanceInVo in = new StopUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         StopUHostInstanceOutVo out = client.exec(in, StopUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -176,7 +172,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testResetUHostInstancePassword() {
         ResetUHostInstancePasswordInVo in = new ResetUHostInstancePasswordInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setPassword("ucloud123456");
         ResetUHostInstancePasswordOutVo out = client.exec(in, ResetUHostInstancePasswordOutVo.class);
@@ -186,7 +181,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testResizeUHostInstance() {
         ResizeUHostInstanceInVo in = new ResizeUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setDiskSpace(80);
         ResizeUHostInstanceOutVo out = client.exec(in, ResizeUHostInstanceOutVo.class);
@@ -196,7 +190,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testReinstallUHostInstance() {
         ReinstallUHostInstanceInVo in = new ReinstallUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setPassword("ucloud2345");
         ReinstallUHostInstanceOutVo out = client.exec(in, ReinstallUHostInstanceOutVo.class);
@@ -206,7 +199,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testStartUHostInstance() {
         StartUHostInstanceInVo in = new StartUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         StartUHostInstanceOutVo out = client.exec(in, StartUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -215,7 +207,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testRebootUHostInstance() {
         RebootUHostInstanceInVo in = new RebootUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         RebootUHostInstanceOutVo out = client.exec(in, RebootUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -224,7 +215,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testModifyUHostInstanceName() {
         ModifyUHostInstanceNameInVo in = new ModifyUHostInstanceNameInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setName("ubuntu1204-001");
         ModifyUHostInstanceNameOutVo out = client.exec(in, ModifyUHostInstanceNameOutVo.class);
@@ -234,7 +224,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testModifyUHostInstanceTag() {
         ModifyUHostInstanceTagInVo in = new ModifyUHostInstanceTagInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setTag("ubuntu1204-001-tag");
         ModifyUHostInstanceTagOutVo out = client.exec(in, ModifyUHostInstanceTagOutVo.class);
@@ -244,7 +233,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testModifyUHostInstanceRemark() {
         ModifyUHostInstanceRemarkInVo in = new ModifyUHostInstanceRemarkInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setRemark("ubuntu1204-001-remark");
         ModifyUHostInstanceRemarkOutVo out = client.exec(in, ModifyUHostInstanceRemarkOutVo.class);
@@ -254,7 +242,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testGetUHostInstancePrice() {
         GetUHostInstancePriceInVo in = new GetUHostInstancePriceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setImageId("e36b3acf76663067684332055ade6bae");
         in.setcPU(1);
         in.setMemory(1024);
@@ -270,7 +257,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testGetUHostInstanceVncInfo() {
         GetUHostInstanceVncInfoInVo in = new GetUHostInstanceVncInfoInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         GetUHostInstanceVncInfoOutVo out = client.exec(in, GetUHostInstanceVncInfoOutVo.class);
 
@@ -284,7 +270,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testCreateCustomImage() {
         CreateCustomImageInVo in = new CreateCustomImageInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         in.setImageName("image-ubuntu1204");
         in.setImageDescription("image-ubuntu1204-desc");
@@ -296,7 +281,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testTerminateCustomImage() {
         TerminateCustomImageInVo in = new TerminateCustomImageInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setImageId("uimage-4pitdj");
         TerminateCustomImageOutVo out = client.exec(in, TerminateCustomImageOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -305,7 +289,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testCreateUHostInstanceSnapshot() {
         CreateUHostInstanceSnapshotInVo in = new CreateUHostInstanceSnapshotInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         CreateUHostInstanceSnapshotOutVo out = client.exec(in, CreateUHostInstanceSnapshotOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -314,7 +297,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testDescribeUHostInstanceSnapshot() {
         DescribeUHostInstanceSnapshotInVo in = new DescribeUHostInstanceSnapshotInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         in.setuHostId("uhost-f1y3dd");
         DescribeUHostInstanceSnapshotOutVo out = client.exec(in, DescribeUHostInstanceSnapshotOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
@@ -323,7 +305,6 @@ public class UcloudUhostClientTest {
     @Test
     public void testTerminateUHostInstance() {
         TerminateUHostInstanceInVo in = new TerminateUHostInstanceInVo();
-        in.setRegion(DataCenterEnum.北京BGP_C.getValue());
         // in.setuHostId("uhost-f1y3dd");
         TerminateUHostInstanceOutVo out = client.exec(in, TerminateUHostInstanceOutVo.class);
         Assert.assertEquals(0, out.getRetCode().intValue());
