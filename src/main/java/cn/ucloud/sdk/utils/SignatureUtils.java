@@ -33,6 +33,12 @@ import cn.ucloud.sdk.enums.MsgEnum;
 public class SignatureUtils {
     private static final Logger logger = Logger.getLogger(SignatureUtils.class);
 
+    /**
+     * Signature
+     * @param privateKey
+     * @param treeMap
+     * @return
+     */
     public static String signature(String privateKey, TreeMap<String, Object> treeMap) {
         if(privateKey == null || privateKey.length() == 0 || treeMap == null || treeMap.size() == 0) {
             logger.error(MsgEnum.U_00001.getMessage());

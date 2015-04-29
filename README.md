@@ -2,7 +2,7 @@
 ## 一个使用Apache HttpClient的简单、易用、易扩展的Java SDK
 ---
 
-基于 [UCLOUD HTTP REST API接口](http://docs.ucloud.cn/api/index.html)开发，适用于Java 5及以上版本。
+基于 [UCLOUD HTTP REST API接口](http://docs.ucloud.cn/api/index.html)开发，适用于Java 6及以上版本。
 
 ## 目录
 * [准备] (#准备)

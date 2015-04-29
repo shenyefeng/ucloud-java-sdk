@@ -19,6 +19,7 @@ package cn.ucloud.sdk.utils;
 import java.io.StringWriter;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.type.TypeReference;
 
 /**
@@ -61,6 +62,7 @@ public class JsonUtils {
     public static <T> T fromJSON(String value, TypeReference<T> type) {
         ObjectMapper mapper = new ObjectMapper();
         try {
+            mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             return mapper.readValue(value, type);
         } catch (RuntimeException ex) {
             throw ex;
@@ -76,6 +78,7 @@ public class JsonUtils {
     public static <T> T fromJSON(String value, Class<T> type) {
         ObjectMapper mapper = new ObjectMapper();
         try {
+            mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             return mapper.readValue(value, type);
         } catch (RuntimeException ex) {
             throw ex;

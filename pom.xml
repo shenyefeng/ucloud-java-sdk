@@ -16,27 +16,34 @@
 	<version>1.0.0</version>
 	<name>ucloud-java-sdk</name>
 	<description>Ucloud java sdk</description>
+	<properties>
+	   <jdk.version>1.6</jdk.version>
+	   <junit.version>4.10</junit.version>
+	   <log4j.version>1.2.14</log4j.version>
+	   <httpclient.version>4.1.2</httpclient.version>
+	   <jackson.version>1.9.13</jackson.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
+			<version>${httpclient.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -45,8 +52,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
 		</plugins>

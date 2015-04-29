@@ -33,6 +33,11 @@ public final class PropertiesUtils {
 	private PropertiesUtils() {
 	}
 
+	/**
+	 * Get properties
+	 * @param name
+	 * @return
+	 */
 	public static String getProperty(String name) {
         
 		if (pro != null)

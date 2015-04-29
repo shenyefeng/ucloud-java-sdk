@@ -27,21 +27,40 @@ public class UcloudException extends Exception {
     
     private static final long serialVersionUID = 7061205581174292757L;
     private String code;
+    
+    /**
+     * Exception with code and message
+     * @param code
+     * @param message
+     */
     public UcloudException(String code, String message) {
         super(message);
         this.code = code;
     }
     
+    /**
+     * Exception with code and message
+     * @param code
+     * @param message
+     */
     public UcloudException(int code, String message) {
         super(message);
         this.code = code + "";
     }
 
+    /**
+     * Exception with enum
+     * @param msgEnum
+     */
     public UcloudException(MsgEnum msgEnum) {
         super(msgEnum.getMessage());
         this.code = msgEnum.name();
     }
 
+    /**
+     * Get code
+     * @return
+     */
     public String getCode() {
         return code;
     }

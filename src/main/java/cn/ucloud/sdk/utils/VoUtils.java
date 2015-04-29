@@ -12,15 +12,28 @@ import cn.ucloud.sdk.vo.UcloudInVo;
 
 public class VoUtils {
 
+    /**
+     * InVo to TreeMap in order to change the parameters' sequence
+     * @param vo
+     * @return
+     */
     public static TreeMap<String, Object> genMap(UcloudInVo vo) {
         TreeMap<String, Object> map = new TreeMap<String, Object>();
         genMap(vo, vo.getClass(), map);
         return map;
     }
 
+    /**
+     * Recursion method to get all fields in object
+     * @param object
+     * @param clazz
+     * @param map
+     */
     private static void genMap(Object object, Class<?> clazz, TreeMap<String, Object> map) {
+        // get super class
         Class<?> superclass = clazz.getSuperclass();
         if (superclass != null) {
+            // if super class not null, call herself
             genMap(object, superclass, map);
         }
 
@@ -31,6 +44,7 @@ public class VoUtils {
                 continue;
             }
             key = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
+            // if field contains "_", replace it with "."
             if(key.indexOf("_") > -1) {
                 key = key.replaceAll("_", ".");
             }
@@ -41,6 +55,12 @@ public class VoUtils {
         }
     }
 
+    /**
+     * Reflection method
+     * @param obj
+     * @param column
+     * @return
+     */
     private static Object getValue(Object obj, String column) {
         Object res = null;
         String method = "get" + getMethodName(column);
@@ -48,12 +68,17 @@ public class VoUtils {
             Method getter = obj.getClass().getMethod(method);
             res = getter.invoke(obj);
         } catch (Exception e) {
-            LogUtil.exception(VoUtils.class, e);
+            LogUtils.exception(VoUtils.class, e);
         }
 
         return res;
     }
     
+    /**
+     * Reflection method
+     * @param column
+     * @return
+     */
     private static String getMethodName(String column) {
         String methodName;
         if(column.length() > 2 && column.substring(1, 2).toUpperCase().equals(column.substring(1, 2))) {
@@ -65,6 +90,12 @@ public class VoUtils {
         return methodName;
     }
     
+    /**
+     * Build out vo
+     * @param str
+     * @param type
+     * @return
+     */
     public static <T> T buildOutVo(String str, Class<T> type) {
         @SuppressWarnings("unchecked")
         Map<String, Object> map = (Map<String, Object>)JsonUtils.fromJSON(str);
@@ -74,6 +105,11 @@ public class VoUtils {
         return JsonUtils.fromJSON(resStr, type);
     }
     
+    /**
+     * Change the key's first letter to upper case
+     * @param resMap
+     * @param map
+     */
     @SuppressWarnings("unchecked")
     private static void changeMapKey(Map<String, Object> resMap, Map<String, Object> map) {
         Map<String, Object> resMapTmp;

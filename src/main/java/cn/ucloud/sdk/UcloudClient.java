@@ -44,25 +44,62 @@ public class UcloudClient {
      * @param publicKey
      * @param privateKey
      */
-    private UcloudClient(String region, String publicKey, String privateKey) {
+    public UcloudClient(String publicKey, String privateKey) {
+        this.region = null;
+        this.publicKey = publicKey;
+        this.privateKey = privateKey;
+        apiUrl = PropertiesUtils.getProperty("api_url");
+    }
+
+    /**
+     * constructor
+     * @param region
+     * @param publicKey
+     * @param privateKey
+     */
+    public UcloudClient(String region, String publicKey, String privateKey) {
         this.region = region;
         this.publicKey = publicKey;
         this.privateKey = privateKey;
         apiUrl = PropertiesUtils.getProperty("api_url");
     }
 
+    /**
+     * Create client without region
+     * @param publicKey
+     * @param privateKey
+     * @return
+     */
     public static UcloudClient newClient(String publicKey, String privateKey) {
         return new UcloudClient(null, publicKey, privateKey);
     }
 
+    /**
+     * Create client with region
+     * @param region
+     * @param publicKey
+     * @param privateKey
+     * @return
+     */
     public static UcloudClient newClient(String region, String publicKey, String privateKey) {
         return new UcloudClient(region, publicKey, privateKey);
     }
 
+    /**
+     * Executor
+     * @param inVo
+     * @param type
+     * @return
+     */
     public <T> T exec(UcloudInVo inVo, Class<T> type) {
         return VoUtils.buildOutVo(execute(inVo), type);
     }
     
+    /**
+     * Execute the request
+     * @param vo
+     * @return
+     */
     private String execute(UcloudInVo vo) {
         if(vo.getRegion() == null || vo.getRegion().length() == 0) {
             vo.setRegion(region);

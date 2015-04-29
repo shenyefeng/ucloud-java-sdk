@@ -22,18 +22,42 @@ import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
 
+import cn.ucloud.sdk.enums.MsgEnum;
+import cn.ucloud.sdk.exception.UcloudException;
+
 /**
  * 
  * @author Jack shen<37393993@qq.com>
  * 
  */
 public class LogUtils {
+    private static final Logger logger = Logger.getLogger(LogUtils.class);
+    
     public static void exception(Logger logger, Exception e) {
         StringWriter sw = new StringWriter();
         try {
             e.printStackTrace(new PrintWriter(sw));
             logger.error(logger.getName() + " occured " + e.getClass().getSimpleName() + " " + e.getMessage());
             logger.error(sw.toString());
+        } finally {
+            try {
+                sw.close();
+            } catch (IOException e1) {
+                logger.error(e1);
+            }
+        }
+    }
+    
+    public static void exception(Class<?> clazz, Throwable e) {
+        StringWriter sw = new StringWriter();
+        try {
+            e.printStackTrace(new PrintWriter(sw));
+            if (e instanceof UcloudException) {
+                logger.warn(clazz.getName() + " occured " + e.getClass().getSimpleName() + " " + MsgEnum.getByCode(((UcloudException) e).getCode()));
+            } else {
+                logger.warn(clazz.getName() + " occured " + e.getClass().getSimpleName() + " " + e.getMessage());
+            }
+            logger.warn(sw.toString());
         } finally {
             try {
                 sw.close();

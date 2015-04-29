@@ -68,6 +68,12 @@ public class EncoderUtils {
         return buf.toString();
     }
 
+    /**
+     * SHA1
+     * @param key
+     * @param str
+     * @return
+     */
     public static String sha1(String key, String str) {
         String algorithm = "HmacSHA1";
         String result = null;
@@ -82,6 +88,11 @@ public class EncoderUtils {
         return result;
     }
     
+    /**
+     * Base64
+     * @param str
+     * @return
+     */
     public static String base64(String str) {
         String result = null;
         try {
